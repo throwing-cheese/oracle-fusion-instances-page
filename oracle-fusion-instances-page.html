@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oracle Fusion Instances Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+	<link rel="shortcut icon" href="https://www.google.com/s2/favicons?sz=64&domain=oracle.com" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto&display=swap" rel="stylesheet">
+	<style>
+		body{font-family: 'Roboto', sans-serif;}
+		td{font-size:12px;}
+		a:hover{color:red;}
+		.page-header{margin-top:10px;}
+		.page-headerh3{border-bottom:1px solid #ccc;}
+		.odd:hover{background:yellow !important;}
+		.even:hover{background:yellow !important;}
+		.environment_row{padding:0 0 0 0; text-align:left; border-bottom:1px solid black; border-right:1px solid black;}
+		.href_non_prod{padding:0 5px 0 5px; text-align:center;}
+		.href_non_prod:visited{background-color:purple;color:white;}
+		.href_prod{padding:0 5px 0 5px; text-align:center;}
+		.href_prod:visited{background-color:red;color:white;}
+		.href_prod:visited{background-color:red;color:white;}
+		.prod{color:#fff;background:#000;}
+		table.dataTable.compact tbody th, table.dataTable.compact tbody td{padding: 2px;}
+		table.dataTable{width: auto; min-width: 0; display: table;}
+		.dataTables_filter{float:left !important; margin-bottom:10px;border:1px solid #ccc;padding:2px;border-radius:2px;}
+	</style>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="border-bottom:1px solid #ccc; margin-bottom:20px;">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand" href="oracle-fusion-instances-page-fj.html">Cloud Links</a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="https://support.oracle.com/epmos/faces/SrHome">Oracle Support</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://community.oracle.com/customerconnect/">Cloud Customer Connect</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cloud Docs</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="https://docs.oracle.com/en/cloud/saas/index.html">Cloud Docs</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/saas/financials&ID=financials">Financials</a></li>
+            <li><a class="dropdown-item" href="https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/saas/procurement&ID=procurement">Procurement</a></li>
+            <li><a class="dropdown-item" href="https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/saas/project-portfolio-management&ID=project-portfolio-management">Project Management</a></li>
+            <li><a class="dropdown-item" href="https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/saas/epm-cloud&ID=epm-cloud-getstarted">EPM</a></li>
+			<li><a class="dropdown-item" href="https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/saas/global-human-resources&ID=global-human-resources">HCM</a></li>
+			<li><a class="dropdown-item" href="https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/saas/applications-common&ID=apps-common">Common</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="https://docs.oracle.com/pls/topic/lookup?ctx=fa-latest&id=OEFBF">FBDI - Financials</a></li>
+			<li><a class="dropdown-item" href="https://docs.oracle.com/pls/topic/lookup?ctx=fa-latest&id=OEFBP">FBDI - Procurement</a></li>
+			<li><a class="dropdown-item" href="https://docs.oracle.com/pls/topic/lookup?ctx=fa-latest&id=OEFPP">FBDI - Projects</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="https://docs.oracle.com/pls/topic/lookup?ctx=fa-latest&id=OEDMF">Tables & Views - Financials</a></li>
+			<li><a class="dropdown-item" href="https://docs.oracle.com/pls/topic/lookup?ctx=fa-latest&id=OEDMP">Tables & Views - Procurement</a></li>
+			<li><a class="dropdown-item" href="https://docs.oracle.com/pls/topic/lookup?ctx=fa-latest&id=OEDPP">Tables & Views - Projects</a></li>
+			<li><a class="dropdown-item" href="https://docs.oracle.com/pls/topic/lookup?ctx=fa-latest&id=OEDMS">Tables & Views - Sales (AR)</a></li>
+			<li><a class="dropdown-item" href="https://docs.oracle.com/pls/topic/lookup?ctx=fa-latest&id=OEDMH">Tables & Views - HR</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="https://docs.oracle.com/pls/topic/lookup?ctx=fa-latest&id=FARFA">REST APIs - Financials</a></li>
+			<li><a class="dropdown-item" href="https://docs.oracle.com/pls/topic/lookup?ctx=fa-latest&id=FAPRA">REST APIs - Procurement</a></li>
+			<li><a class="dropdown-item" href="https://docs.oracle.com/pls/topic/lookup?ctx=fa-latest&id=FAPAP">REST APIs - Projects</a></li>
+			<li><a class="dropdown-item" href="https://docs.oracle.com/pls/topic/lookup?ctx=fa-latest&id=FARWS">REST APIs - HCM</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Release Docs</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/cloud/r13/nfs/common/new-common-nfs.htm">Common Technologies and User Experience</a></li>
+            <li><a class="dropdown-item" href="https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/readiness/offering/index.html?product=epm-21">EPM</a></li>
+            <li><a class="dropdown-item" href="https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/readiness/offering/index.html?product=financials">Financials</a></li>
+            <li><a class="dropdown-item" href="https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/readiness/offering/index.html?product=human-resources-21">HR</a></li>
+            <li><a class="dropdown-item" href="https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/readiness/offering/index.html?product=payroll-21">Payroll</a></li>
+            <li><a class="dropdown-item" href="https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/readiness/offering/index.html?product=erp-procurement-21">Procurement</a></li>
+            <li><a class="dropdown-item" href="https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/readiness/offering/index.html?product=project-mgmt-21">Projects</a></li>
+            <li><a class="dropdown-item" href="https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/readiness/offering/index.html?product=erp-ssproc-21">Self-Service Procurement</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/cloud/r13/wn/optin.htm">Opt In Expiration</a></li>
+			<li><a class="dropdown-item" href="https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/cloud/r13/wn/fin/financials-optin.htm">Opt In Features With Future Expiration</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="'https://support.oracle.com/rs?type=doc&id=2816277.1">Fusion Applications Maintenance Packs</a></li>
+			<li><a class="dropdown-item" href="https://support.oracle.com/rs?type=doc&id=1603154.1">Known Issues - Apps</a></li>
+			<li><a class="dropdown-item" href="https://support.oracle.com/rs?type=doc&id=1554838.1">Known Issues - HCM</a></li>
+			<li><a class="dropdown-item" href="https://support.oracle.com/rs?type=doc&id=1597086.1">Known Issues - Financials</a></li>
+			<li><a class="dropdown-item" href="https://support.oracle.com/rs?type=doc&id=1554124.1">Known Issues - Procurement</a></li>
+			<li><a class="dropdown-item" href="https://support.oracle.com/rs?type=doc&id=1545504.1">Known Issues - Projects</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="https://www.oracle.com/readiness/">Oracle Cloud Readiness</a></li>
+			<li><a class="dropdown-item" href="https://blogs.oracle.com/erp-ace/post/harness-the-business-value-of-quarterly-updates">Blog Post about Quarterly Updates</a></li>
+			<li><a class="dropdown-item" href="https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/cloud/cloud-apps-feature-listing.xlsx">Cloud Feature Listing Spreadsheet (updated weekly)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+	<div class="container-fluid">
+	
+		<h1>Oracle Fusion Instances Page</h1>
+		
+		<hr>
+		
+		<small><a href="#anchor_customer_links">Customer Links</a> / <a href="#anchor_cohorts">Release Cohorts</a> / <a href="#anchor_oracle_support">Oracle Support Shortcuts</a></small>
+		
+		<hr>
+		
+		<h3 id="anchor_customer_links">Cloud Customer Links</h3>
+		
+		<hr>
+		
+		<table id="customer_info" style="margin-right:auto;margin-left:0px;" class="cell-border compact">
+			<thead>
+				<tr>
+					<th>Customer</th>
+					<th title="Initials">INI</th>
+					<th title="Label">LBL</th>
+					<th>Wave</th>
+					<th>URL</th>
+					<th>Cloned</th>
+					<th>Links</th>
+				</tr>
+			</thead>
+			<tbody id="customer_links_rows">
+			</tbody>
+		</table>
+
+		<hr />
+		
+		<div class="page-header">
+			<h4 id="anchor_cohorts">Release Cohorts [<a href="#top">top</a>]</h4>
+		</div>
+		
+		<p>Every quarter, Oracle updates an organisation's environments with fixes and new features. Changes may include customer enhancements, legislative changes and updates to the underlying technology stack.</p>
+		
+		<p>An organisation's cohort determines when the quarterly update is applied to their pods:</p>
+		
+		<ul>
+			<li>Cohort A: February-May-August-November</li>
+			<li>Cohort B: March-June-September-December</li>
+			<li>Cohort C: April-July-October-January</li>
+		</ul>
+		
+		<p>Stage pods are updated on the first Friday of an organisation's quarterly update month. Production pods are updated two weeks later on the third Friday of the month.</p>
+		
+		<p>Quarterly update names combine the year and A, B, C or D. For example, the release for the first quarter of 2023 is 23A; the release for the second quarter of 2023 is 23B; and the release for the first quarter of 2024 will be 24A.</p>
+		
+		<p>Quarterly updates cannot be delayed or skipped. This ensures that all customers use the most up-to-date and certified versions of the applications.</p>
+
+		<table id="waves" style="width:200px;" class="table table-striped-columns table-sm table-hover">
+			<thead>
+				<tr>
+					<th></th>
+					<th colspan="4" style="text-align:center;">RELEASE</th>
+				</tr>
+				<tr>
+					<th>Cohort</th>
+					<th>A</th>
+					<th>B</th>
+					<th>C</th>
+					<th>D</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="table-primary">
+					<td>A</td>
+					<td>Feb</td>
+					<td>May</td>
+					<td>Aug</td>
+					<td>Nov</td>
+				</tr>
+				<tr class="table-secondary">
+					<td>B</td>
+					<td>Mar</td>
+					<td>Jun</td>
+					<td>Sep</td>
+					<td>Dec</td>
+				</tr>
+				<tr class="table-success">
+					<td>C</td>
+					<td>Apr</td>
+					<td>Jul</td>
+					<td>Oct</td>
+					<td>Jan</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		
+
+		<hr />
+		
+		<h4 id="anchor_oracle_support">Oracle Support Shortcuts [<a href="#top">top</a>]</h4>
+		
+		<div style="background:#d5f6ff; padding:10px;">
+			<label for="note">Note</label><input id="note" type="text" style="width:800px;" value="https://support.oracle.com/rs?type=doc&id=XXXXX" class="form-control" />
+			<label for="patch" style="margin-top:10px;">Patch</label><input id="patch" type="text" style="width:800px;" value="https://support.oracle.com/rs?type=patch&id=XXXXXX" class="form-control" />
+			<label for="bug" style="margin-top:10px;">Bug</label><input id="bug" type="text" style="width:800px;" value="https://support.oracle.com/rs?type=bug&id=XXXXXX" class="form-control" />
+			<label for="sr" style="margin-top:10px;">SR</label><input id="sr" type="text" style="width:800px;" value="https://support.oracle.com/epmos/faces/SrDetail?srDetailRelativeDateParam=false&srNumber=XXXXXX" class="form-control" />
+			<label for="rfc" style="margin-top:10px;">RFC</label><input id="rfc" type="text" style="width:800px;" value="https://support.oracle.com/epmos/faces/OnDemandRfcDetail?rfcNumber=XXXXXX" class="form-control" />
+			<label for="snow_inc_search" style="margin-top:10px;">Service Now Incident</label><input id="snow_inc_search" type="text" style="width:800px;" value="https://example.service-now.com/incident.do?sysparm_query=number=XXXXXX" class="form-control" />
+			<label for="snow_change_search" style="margin-top:10px;">Service Now Incident</label><input id="snow_change_search" type="text" style="width:800px;" value="https://example.service-now.com/change_request.do?sysparm_query=number=XXXXXX" class="form-control" />
+			<label for="snow_search" style="margin-top:10px;">Service Now Text Search</label><input id="snow_search" type="text" style="width:800px;" value="https://example.service-now.com/nav_to.do?uri=/$sn_global_search_results.do?sysparm_search=XXXXXX" class="form-control" />
+		</div>
+
+		<hr />
+		
+		<ul>
+		  <li>HTML via <a href="https://getbootstrap.com/">Bootstrap</a></li>
+		  <li>Instance Colours via <a href="https://getbootstrap.com/docs/5.3/assets/css/docs.css">Bootstrap Docs CSS</a> via <a href="https://creativecommons.org/licenses/by/3.0/">Attribution 3.0 Unported (CC BY 3.0) licence</a></li>
+		  <li>Table Sorting via <a href="https://datatables.net/">Datatables</a></li>
+		</ul>
+		
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+	<script>
+	
+		// Debug function, used when testing
+		// sample: debug_this("Variable A:", var_a, "log");
+		
+		function debug_this(debug_label, debug_var, debug_type, line_num) {
+			let debug_text = 'var: ' + debug_label + ' [' + debug_var + ']';
+			if (debug_type === "log") {
+				console.log(debug_text);
+			} else if (debug_type === "alert") {
+				alert(debug_text);
+			}
+		}
+		
+		// https://stackoverflow.com/a/2450976/4532066
+		function shuffle(array) {
+		  let currentIndex = array.length,  randomIndex;
+
+		  // While there remain elements to shuffle.
+		  while (currentIndex != 0) {
+
+			// Pick a remaining element.
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex--;
+
+			// And swap it with the current element.
+			[array[currentIndex], array[randomIndex]] = [
+			  array[randomIndex], array[currentIndex]];
+		  }
+
+		  return array;
+		}
+		
+		// data for customers and customer instances
+
+		let data = {
+			"customers": [{
+				"name": "Department of Carrots",
+				"initials": "DOC",
+				"url": "https://example.com/DepartmentofCarrots/",
+				"wave": "C",
+				"instances": [
+					{ "url": "bird.aa.bb2", "label":"PROD"},
+					{ "url": "bird-dev1.aa.bb2", "label":"DEV1"},
+					{ "url": "bird-test.aa.bb2", "label":"TEST"}
+				]}, {
+				"name": "Fine Cheese Manufacturers",
+				"initials": "FCM",
+				"url": "https://example.com/DOC/",
+				"wave": "n/a",
+				"instances": [
+					{ "url": "fa-long-saasfaprod1.fa.ocs", "label":"PROD"},
+					{ "url": "fa-long-dev1-saasfaprod1.fa.ocs", "label":"DEV1", "cloned":"2022-12-05"}
+				]}, {
+				"name": "Gotham City Council",
+				"initials": "GCC",
+				"url": "https://example.com/FCM/",
+				"wave": "A",
+				"instances": [
+					{ "url": "song.fa.em3", "label":"PROD"},
+					{ "url": "song-test.fa.em3", "label":"TEST", "cloned":"2023-01-17" },
+					{ "url": "song-dev2.fa.em3", "label":"DEV2", "cloned":"2023-01-30" },
+					{ "url": "song-dev7.fa.em3", "label":"PREPROD", "cloned":"2022-06-23" },
+					{ "url": "song-dev1.fa.em3", "label":"TRAIN", "cloned":"2022-11-29" }
+				]}, {
+				"name": "Incredibly Edible Bricks",
+				"initials": "IEB",
+				"wave": "C"
+				}, {
+				"name": "Gotham City Hospital",
+				"initials": "GCH",
+				"url": "https://example.com/GCH/Shared%20Documents/Managed%20Services",
+				"wave": "B",
+				"instances": [
+					{ "url": "fa-ping-saasfaprod1.fa.ocs", "label":"PROD"},
+					{ "url": "fa-ping-dev1-saasfaprod1.fa.ocs", "label":"DEV", "cloned":"2022-11-16" },
+					{ "url": "fa-ping-test-saasfaprod1.fa.ocs", "label":"TEST", "cloned":"2022-11-17" }
+				]}, {
+				"name": "Fine Cheese Runners",
+				"initials": "FCR",
+				"url": "https://example.com/FCR/",
+				"wave": ""
+				}, {
+				"name": "Cheesy Crate Express",
+				"initials": "CCE",
+				"url": "https://example.com/CCE/",
+				"wave": "A",
+				"instances": [
+					{ "url": "fa-pong-saasfaprod1.fa.ocs", "label":"PROD"},
+					{ "url": "fa-pong-dev1-saasfaprod1.fa.ocs", "label":"DEV", "cloned":"2022-06-10" },
+					{ "url": "fa-pong-test-saasfaprod1.fa.ocs", "label":"TEST", "cloned":"2022-11-28" }
+				]}, {
+				"name": "Fromage Fresh Corp",
+				"initials": "FFC",
+				"url": "https://example.com/FFC/",
+				"wave": "A",
+				"instances": [
+					{ "url": "hoop.fa.em3", "label":"PROD"},
+					{ "url": "hoop-dev2.fa.em3", "label":"DEV2"},
+					{ "url": "hoop-dev4.fa.em3", "label":"DEV4"},
+					{ "url": "hoop-test.fa.em3", "label":"TEST"}
+				]}, {
+				"name": "Ricotta Ridge Express",
+				"initials": "RRE",
+				"wave": "C",
+				"instances": [
+					{ "url": "flat.fa.em1.zzz", "label":"PROD", "css":"PROD"},
+					{ "url": "flat-dev1.fa.em1.zzz", "label":"DEV"},
+					{ "url": "flat-test.fa.em1.zzz", "label":"TEST"}
+				]}, {
+				"name": "Stinky Cheese Association",
+				"initials": "PAR",
+				"url": "https://example.com/PAR/",
+				"wave": "C",
+				"instances": [
+					{ "url": "fa-golf-saasfaprod1.fa.ocs", "label":"PROD"},
+					{ "url": "fa-golf-dev1-saasfaprod1.fa.ocs", "label":"DEV1"},
+					{ "url": "fa-golf-test-saasfaprod1.fa.ocs", "label":"TEST"}
+				]}, {
+				"name": "Smelly Socks Champions",
+				"initials": "SSC",
+				"url": "https://example.com/SSC/",
+				"wave": "C",
+				"instances": [
+					{ "url": "flit.fa.em1.zzz", "label":"PROD"},
+					{ "url": "flit-test.fa.em1.zzz", "label":"TEST"}
+				]}, {
+				"name": "Pungent Cheddar Association",
+				"initials": "PCA",
+				"url": "https://example.com/PCA/",
+				"wave": "A",
+				"instances": [
+					{ "url": "flot.fa.em3", "label":"PROD"},
+					{ "url": "flot-dev2.fa.em3", "label":"DEV"},
+					{ "url": "flot-test.fa.em3", "label":"TEST"},
+					{ "url": "flot-dev5.fa.em3", "label":"TRAIN"}
+				]}, {
+				"name": "Metropolis City Council",
+				"initials": "MCC",
+				"url": "https://example.com/MCC/",
+				"wave": "A",
+				"instances": [
+					{ "url": "able.fa.em3", "label":"PROD"},
+					{ "url": "able-dev1.fa.em3", "label":"DEV1"},
+					{ "url": "able-dev2.fa.em3", "label":"DEV2"},
+					{ "url": "able-dev3.fa.em3", "label":"DEV3"},
+					{ "url": "able-test.fa.em3", "label":"TEST"}
+				]}
+			]
+		 };
+
+		 console.log(data);
+
+		// customer instances table
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@
+		
+		let today = new Date();
+		let dd = today.getDate();
+		let mm = today.getMonth()+1; 
+		let yyyy = today.getFullYear();
+		today = yyyy+ '-' + mm + '-' + dd;
+		let today_date = new Date(today);
+
+		// colours array
+		
+		const colour_array = ["blue","indigo","purple","pink","red","orange","yellow","green","teal","cyan","gray"];
+		let colour_array_length = colour_array.length;
+
+		let customer_links_rows_html = '';
+		let colour_loop_counter = 0;
+		
+		// loop through the customers
+		// #####################################################################
+		
+		for (let customer_key in data.customers) {
+			let obj = data.customers[customer_key];
+			let name = obj.name;
+			let initials = obj.initials;
+			let url = obj.url;
+			if(url) {
+				name_link = '<a title = "' + url + '" href="' + url + '">' + name + '</a>';
+			} else {
+				name_link = name;
+			}
+			let customer_wave = obj.wave;
+	
+			// colour loop logic
+
+			let instance_colour = colour_array[colour_loop_counter];
+			
+			if (instance_colour === undefined) {
+			 	let colour_modulus_value = colour_loop_counter % colour_array_length;
+				instance_colour = colour_array[colour_modulus_value];
+			}
+				
+			if(obj.instances) {
+			
+				let instances = obj.instances;
+				let instances_count = instances.length;
+				let instances_loop_counter = 1;
+				
+				// how many different css shades per colour
+				let css_color_counter = 9;
+				
+				// loop through the instances
+				// #####################################################################
+				
+				for (let inst_key in obj.instances) {
+				
+					let cloned_output = '';
+					let difference;
+					let ago = '';
+					let instance_css;
+					let cloned_length = 0;
+					let instance_data = obj.instances[inst_key];
+					let url = instance_data.url;
+					let label = instance_data.label;
+
+					if (instances_loop_counter > css_color_counter) {
+						instances_loop_counter = instances_loop_counter % css_color_counter;
+					}
+					
+					css_colour_number = instances_loop_counter * 100;
+					
+					// get cloned date and then work out how long ago the clone date was
+					let cloned = instance_data.cloned;
+					if(cloned) {
+						cloned_date = new Date(cloned);
+						difference = today_date - cloned_date;
+						difference_calc = Math.floor(difference/(1000*3600*24)) + 1;
+						if(difference_calc > 1) {
+							var_unit = "days";
+						} else {
+							var_unit = "day";
+						}
+						let cloned_output = new Date(cloned).toDateString();
+						ago = " <span title='number of days ago' style='color:#999;background:yellow;'>(" + difference_calc + ")</span>";
+					}
+					
+					
+					if (label === "PROD") {
+						instance_css = "prod";
+						instance_link_class = "href_prod"
+						
+						// reduce instances_loop_counter by one for PROD to ensure non prod instances start their css colour number at 100 not 200
+						instances_loop_counter--;
+					} else {
+						instance_css = "bd-" + instance_colour + "-" + css_colour_number;
+						instance_link_class = "href_non_prod"
+					}
+					
+					let home_url = "https://" + url + ".oraclecloud.com/fscmUI/faces/FuseWelcome";
+					let home_url_title = initials + ' ' + label + ' ' + 'Fusion Homepage';
+					
+					let sql_url = "https://" + url + ".oraclecloud.com/analytics/saw.dll?catalog";
+					let sql_url_title = initials + ' ' + label + ' ' + 'SQL Catalog';
+					
+					let bpm_url = "https://" + url + ".oraclecloud.com/integration/worklistapp/faces/home.jspx";
+					let bpm_url_title = initials + ' ' + label + ' ' + 'BPM Worklist';
+					
+					let bpm_admin_url = "https://" + url + ".oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=administration";
+					let bpm_admin_url_title = initials + ' ' + label + ' ' + 'BPM Admin Home';
+					
+					let bpm_appr_gps_url = "https://" + url + ".oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=approvalGroup";
+					let bpm_appr_gps_url_title = initials + ' ' + label + ' ' + 'BPM Approval Groups';
+					
+					let bpm_tasks_url = "https://" + url + ".oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=taskConfig";
+					let bpm_tasks_url_title = initials + ' ' + label + ' ' + 'BPM Approval Tasks';
+					
+					let fsm_url = "https://" + url + ".oraclecloud.com/fscmUI/faces/FuseTaskListManagerTop";
+					let fsm_url_title = initials + ' ' + label + ' ' + 'Setup and Maintenance';
+					
+					let cs_url = "https://" + url + ".oraclecloud.com/cs";
+					let cs_url_title = initials + ' ' + label + ' ' + 'Content Server';
+					
+					let img_url = "https://" + url + ".oraclecloud.com/imaging/";
+					let img_url_title = initials + ' ' + label + ' ' + 'Imaging Homepage';
+					
+					let bi_history = "https://" + url + ".oraclecloud.com/analytics/saw.dll?bipublisherEntry&Action=history";
+					let bi_history_title = initials + ' ' + label + ' ' + 'BI History Search';
+
+					customer_links_rows_html += '<tr>';
+					customer_links_rows_html += '<td>' + name_link + '</td>';
+					customer_links_rows_html += '<td>' + initials + '</td>';
+					customer_links_rows_html += '<td>' + label + '</td>';
+					customer_links_rows_html += '<td>' + customer_wave + '</td>';
+					customer_links_rows_html += '<td><code>' + url + '</code></td>';
+					if(cloned) {
+						customer_links_rows_html += '<td>' + cloned + ago + '</td>';
+					} else {
+						customer_links_rows_html += '<td></td>';
+					}
+					customer_links_rows_html += '<td class="environment_row ' + instance_css + '">';
+					customer_links_rows_html += '<a title="' + home_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + home_url + '">Home</a>/';
+					customer_links_rows_html += '<a title="' + sql_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + sql_url + '">SQL</a>/';
+					customer_links_rows_html += '<a title="' + fsm_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + fsm_url + '">S&M</a>/';
+					customer_links_rows_html += '<a title="' + bpm_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + bpm_url + '">WL</a>/';
+					customer_links_rows_html += '<a title="' + bpm_admin_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + bpm_admin_url + '">ADM</a>/';
+					customer_links_rows_html += '<a title="' + bpm_tasks_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + bpm_tasks_url + '">TASKS</a>/';
+					customer_links_rows_html += '<a title="' + bpm_appr_gps_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + bpm_appr_gps_url + '">GPS</a>/';
+					customer_links_rows_html += '<a title="' + cs_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + cs_url + '">CS</a>/';
+					customer_links_rows_html += '<a title="' + img_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + img_url + '">Img</a>/';
+					customer_links_rows_html += '<a title="' + bi_history_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + bi_history + '">History</a>';
+					customer_links_rows_html += '</td>';
+					customer_links_rows_html += '</tr>';
+					instances_loop_counter++;
+				}
+				
+				document.getElementById("customer_links_rows").innerHTML = customer_links_rows_html;
+				
+			}
+			
+			colour_loop_counter++;
+			
+		}
+		
+		// set up data tables
+
+		$(document).ready(function() {
+			$('#customer_info').DataTable( {
+				paging: false,
+				"order": [[0, 'asc']],
+				responsive: true,
+				"scrollX": false,
+				"autoWidth": false,
+				/*"columnDefs": [
+					{ "orderable": false, "targets": 1 } // disable sorting on the "INI" Initials column
+				],*/
+				// "sDom": 'rtlfip', // uncomment to move filter to bottom of table
+				"language": {
+					search: '<i class="fa fa-filter" aria-hidden="true"></i>  ',
+					searchPlaceholder: 'filter customers'
+				}
+			});
+		});
+	
+	</script>
+	
+
+  </body>
+</html>
