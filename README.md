@@ -59,6 +59,7 @@ If you want to use the page for your own organisation, you can edit the JSON par
 Each customer has 5 attributes:
 - name
 - initials
+- emoji (added to help differentiate between instances)
 - url
 - wave
 - instances
@@ -68,12 +69,17 @@ Each customer has 5 attributes:
 	  - cloned (date cloned - optional - if populated, the clone age in days is displayed in light grey)
 
 ```javascript
+// @@@@@@@@@@@@@@@@@@@@@@@@@@
+// customer instances
+// @@@@@@@@@@@@@@@@@@@@@@@@@@
+
 // data for customers and customer instances
 
-let data = {
+let data_customers = {
 	"customers": [{
 		"name": "Department of Carrots",
 		"initials": "DOC",
+		"emoji": "🥕",
 		"url": "https://example.com/DepartmentofCarrots/",
 		"wave": "3",
 		"instances": [
@@ -83,6 +89,7 @@ let data = {
 		]}, {
 		"name": "Fine Cheese Manufacturers",
 		"initials": "FCM",
+		"emoji": "🧀",
 		"url": "https://example.com/DOC/",
 		"wave": "n/a",
 		"instances": [
@@ -91,6 +98,7 @@ let data = {
 		]}, {
 		"name": "Gotham City Council",
 		"initials": "GCC",
+		"emoji": "🦁",
 		"url": "https://example.com/FCM/",
 		"wave": "1",
 		"instances": [
@@ -102,10 +110,12 @@ let data = {
 		]}, {
 		"name": "Incredibly Edible Bricks",
 		"initials": "IEB",
+		"emoji": "🐮",
 		"wave": "3"
 		}, {
 		"name": "Gotham City Hospital",
 		"initials": "GCH",
+		"emoji": "🏥",
 		"url": "https://example.com/GCH/Shared%20Documents/Managed%20Services",
 		"wave": "2",
 		"instances": [
@@ -115,11 +125,13 @@ let data = {
 		]}, {
 		"name": "Fine Cheese Runners",
 		"initials": "FCR",
+		"emoji": "🏃",
 		"url": "https://example.com/FCR/",
 		"wave": ""
 		}, {
 		"name": "Cheesy Crate Express",
 		"initials": "CCE",
+		"emoji": "🎯",
 		"url": "https://example.com/CCE/",
 		"wave": "1",
 		"instances": [
@@ -129,6 +141,7 @@ let data = {
 		]}, {
 		"name": "Fromage Fresh Corp",
 		"initials": "FFC",
+		"emoji": "🥶",
 		"url": "https://example.com/FFC/",
 		"wave": "1",
 		"instances": [
@@ -139,6 +152,7 @@ let data = {
 		]}, {
 		"name": "Ricotta Ridge Express",
 		"initials": "RRE",
+		"emoji": "✅",
 		"url": "https://example.com/RRE/",
 		"wave": "3",
 		"instances": [
@@ -147,8 +161,9 @@ let data = {
 			{ "url": "flat-test.fa.em1.zzz", "label":"TEST"}
 		]}, {
 		"name": "Stinky Cheese Association",
-		"initials": "PAR",
-		"url": "https://example.com/PAR/",
+		"initials": "SCA",
+		"emoji": "👃",
+		"url": "https://example.com/SCA/",
 		"wave": "3",
 		"instances": [
 			{ "url": "fa-golf-saasfaprod1.fa.ocs", "label":"PROD"},
@@ -157,6 +172,7 @@ let data = {
 		]}, {
 		"name": "Smelly Socks Champions",
 		"initials": "SSC",
+		"emoji": "🧦",
 		"url": "https://example.com/SSC/",
 		"wave": "3",
 		"instances": [
@@ -165,6 +181,7 @@ let data = {
 		]}, {
 		"name": "Pungent Cheddar Association",
 		"initials": "PCA",
+		"emoji": "🐈",
 		"url": "https://example.com/PCA/",
 		"wave": "1",
 		"instances": [
@@ -175,6 +192,7 @@ let data = {
 		]}, {
 		"name": "Metropolis City Council",
 		"initials": "MCC",
+		"emoji": "🍎",
 		"url": "https://example.com/MCC/",
 		"wave": "1",
 		"instances": [
