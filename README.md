@@ -39,10 +39,10 @@ Each organisation for which JSON data is defined will have a block appear, such 
 
 If the instance label is `PROD` then the table row for that instance will have a black background to make the PROD instances stand out.
 
-The labels for the links are abbreviate to save space - meanings below, with made up Fusion URL:
+The labels for the links are abbreviated to save space - meanings below, with made up Fusion URL (click `Headings Meanings` next to `Links` column heading to open pop-up window that provides an explanation of the headings):
 
 - Home - Fusion Homepage (`https://xyz.oraclecloud.com/fscmUI/faces/FuseWelcome`)
-- SQL - SQL Catalog Homepq (`https://xyz.oraclecloud.com/analytics/saw.dll?catalog`)
+- SQL - SQL Catalog Homepage (`https://xyz.oraclecloud.com/analytics/saw.dll?catalog`)
 - S&M - Setup and Maintenance Homepage (`https://xyz.oraclecloud.com/fscmUI/faces/FuseTaskListManagerTop`)
 - WL - BPM Worklist (`https://xyz.oraclecloud.com/integration/worklistapp/faces/home.jspx`)
 - ADM - BPM Admin Home (`https://xyz.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=administration`)
