@@ -12,12 +12,17 @@ The idea behind this was to allow the customer data to be defined once, and then
 
 If you have a lot of customers, you can use the `filter customers` search box at the top of the list of customers to easily filter the list of instances.
 
-###  Top Level Menu
+## Demo
+
+Demo [available here](https://throwing-cheese.github.io/demo/html/oracle-fusion-instances-page.html)
+
+##  Top Level Menu
 
 The page also contains links in the top menu to various Fusion Docs, grouped into headings:
 
 - Oracle Support
 - Cloud Customer Connect
+- Explorer Training
 - Cloud Docs
   - Userguides, FBDI Docs, Tables and Views, REST APIs
 - Release Docs
@@ -26,7 +31,7 @@ The page also contains links in the top menu to various Fusion Docs, grouped int
   - Known Issues
   - Feature Listing Spreadsheet
 
-### Instances Links
+## Instances Links
 
 Each organisation for which JSON data is defined will have a block appear, such as:
 
@@ -47,11 +52,7 @@ The labels for the links are abbreviate to save space - meanings below, with mad
 - Img - Imaging Homepage (`https://xyz.oraclecloud.com/cs`)
 - History - BI Publisher Job History (`https://xyz.oraclecloud.com/analytics/saw.dll?bipublisherEntry&Action=history`)
 
-## Demo
-
-Demo [available here](https://throwing-cheese.github.io/demo/html/oracle-fusion-instances-page.html)
-
-## Sample JSON Customer Data
+### Instances Links JSON
 
 If you want to use the page for your own organisation, you can edit the JSON part of the file.
 
@@ -185,5 +186,72 @@ let data = {
 		]}
 	]
  };
+```
 
+## Release Docs
+
+For the main modules (Financials, Procurement, Projects, HCM, Payroll, Common), `What's New` Release Docs are shown in a table under the `Oracle Release Docs` heading, linking through to the release docs for release A, B, C and D for year year from 2019 through to current + 1 year (e.g. as of 6th December 2023, the release docs go up to Release 24D for 2024).
+
+Useful as allows you to filter on module / year / release label to narrow down which set Release Docs to return.
+
+### Release Docs JSON
+
+The Release Docs table is held in JSON format - edit as required if you want to add / delete modules:
+
+```javascript
+// @@@@@@@@@@@@@@@@@@@@@@@@@@
+// oracle release docs
+// @@@@@@@@@@@@@@@@@@@@@@@@@@
+
+// data for modules in a release
+
+let data_modules = {
+	"modules": [{
+		"module_name": "Financials",
+		"parent_label": "ERP",
+		"module_url_tag_1": "fin",
+		"module_url_tag_2": "financials"
+		},{
+		"module_name": "Human Resources Cloud",
+		"parent_label": "HCM",
+		"module_url_tag_1": "ghr",
+		"module_url_tag_2": "global-hr"
+		},{
+		"module_name": "Human Resources Helpdesk",
+		"parent_label": "HCM",
+		"module_url_tag_1": "hr-helpdesk",
+		"module_url_tag_2": "hr-helpdesk"
+		},{
+		"module_name": "HCM Cloud Common",
+		"parent_label": "HCM",
+		"module_url_tag_1": "hcmcommon",
+		"module_url_tag_2": "hcm-common"
+		},{
+		"module_name": "Oracle Common Technologies and User Experience",
+		"parent_label": "Common",
+		"module_url_tag_1": "common",
+		"module_url_tag_2": "common"
+		},{
+		"module_name": "Payroll",
+		"parent_label": "HCM",
+		"module_url_tag_1": "payroll",
+		"module_url_tag_2": "payroll"
+		},{
+		"module_name": "Procurement",
+		"parent_label": "SCM",
+		"module_url_tag_1": "proc",
+		"module_url_tag_2": "procurement"
+		},{
+		"module_name": "Project Management",
+		"parent_label": "ERP",
+		"module_url_tag_1": "ppm",
+		"module_url_tag_2": "ppm"
+		},{
+		"module_name": "Self Service Procurement",
+		"parent_label": "SCM",
+		"module_url_tag_1": "ssproc",
+		"module_url_tag_2": "ssproc"
+		}
+	]
+ };
 ```
