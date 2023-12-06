@@ -193,6 +193,7 @@
 			<thead>
 				<tr>
 					<th>Release</th>
+					<th>Version</th>
 					<th>Date</th>
 					<th>Parent</th>
 					<th>Label</th>
@@ -690,12 +691,16 @@
 
 				if(loop_release === "A") {
 					loop_release_month = "Jan";
+					loop_release_number = "01";
 				} else if(loop_release === "B") {
 					loop_release_month = "Apr";
+					loop_release_number = "04";
 				} else if(loop_release === "C") {
 					loop_release_month = "Jul";
+					loop_release_number = "07";
 				} else if(loop_release === "D") {
 					loop_release_month = "Oct";
+					loop_release_number = "10";
 				}
 
 				// [03] loop through the modules for this release
@@ -721,12 +726,15 @@
 					module_url = module_url.replace('@release2', release_label_url);
 					module_name_link = '<a title = "' + module_url + '" href="' + module_url + '" class="' + module_link_css + ' ' + module_css + '">' + module_name + ' (' + release_label + ')</a>';
 					
+					let release_version = "11.13." + loop_year_yy + "." + loop_release_number + ".0";
+					
 					if (modules_loop_counter > css_color_counter) {
 						modules_loop_counter = modules_loop_counter % css_color_counter;
 					}
 					
 					release_docs_rows_html += '<tr>';
 					release_docs_rows_html += '<td class="' + var_current_year_css + '">' + release_label + '</td>';
+					release_docs_rows_html += '<td><code>' + release_version + '</code></td>';
 					release_docs_rows_html += '<td>' + release_date + '</td>';
 					release_docs_rows_html += '<td>' + parent_label + '</td>';
 					release_docs_rows_html += '<td>' + module_url_tag_1 + '</td>';
