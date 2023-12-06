@@ -35,7 +35,7 @@ The page also contains links in the top menu to various Fusion Docs, grouped int
 
 Each organisation for which JSON data is defined will have a block appear, such as:
 
-![Sample instances block for a made up organisation](https://jimpix.co.uk/ink/gh/oracle-fusion-instances-page/0001-block.png)
+![Sample instances block for a made up organisation](https://jimpix.co.uk/dist/images/github/oracle-fusion-instances-page/0001-block.png)
 
 If the instance label is `PROD` then the table row for that instance will have a black background to make the PROD instances stand out.
 
