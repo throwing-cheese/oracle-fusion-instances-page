@@ -117,7 +117,7 @@
 					<th>Cohort</th>
 					<th>URL</th>
 					<th>Cloned</th>
-					<th>Links</th>
+					<th>Links [<small><a data-bs-toggle="modal" data-bs-target="#linkHeadingsExplanation" href="#">Heading Meanings</a></small>]</th>
 				</tr>
 			</thead>
 			<tbody id="customer_links_rows">
@@ -227,6 +227,37 @@
 		  <li>Instance Colours via <a href="https://getbootstrap.com/docs/5.3/assets/css/docs.css">Bootstrap Docs CSS</a> via <a href="https://creativecommons.org/licenses/by/3.0/">Attribution 3.0 Unported (CC BY 3.0) licence</a></li>
 		  <li>Table Sorting via <a href="https://datatables.net/">Datatables</a></li>
 		</ul>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="linkHeadingsExplanation" tabindex="-1" aria-labelledby="linkHeadingsExplanationLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">Explanation of Links</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<small>
+							<ul class="list-unstyled">
+								<li><strong>Home</strong> - Fusion Homepage<br><code>(xyz.oraclecloud.com/fscmUI/faces/FuseWelcome)</code></li>
+								<li><strong>SQL</strong> - SQL Catalog Homepage<br><code>(xyz.oraclecloud.com/analytics/saw.dll?catalog)</code></li>
+								<li><strong>S&M</strong> - Setup and Maintenance Homepage<br><code>(xyz.oraclecloud.com/fscmUI/faces/FuseTaskListManagerTop)</code></li>
+								<li><strong>WL</strong> - BPM Worklist<br><code>(xyz.oraclecloud.com/integration/worklistapp/faces/home.jspx)</code></li>
+								<li><strong>ADM</strong> - BPM Admin Home<br><code>(xyz.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=administration)</code></li>
+								<li><strong>TASKS</strong> - BPM Approval Tasks<br><code>(xyz.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=taskConfig)</code></li>
+								<li><strong>GPS</strong> - BPM Approval Groups<br><code>(xyz.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=approvalGroup)</code></li>
+								<li><strong>CS</strong> - Content Server<br><code>(xyz.oraclecloud.com/cs)</code></li>
+								<li><strong>Img</strong> - Imaging Homepage<br><code>(xyz.oraclecloud.com/cs)</code></li>
+								<li><strong>History</strong> - BI Publisher Job History<br><code>(xyz.oraclecloud.com/analytics/saw.dll?bipublisherEntry&Action=history)</code></li>
+							</ul>
+						</small>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		
 	</div>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -763,10 +794,9 @@
 				responsive: true,
 				"scrollX": false,
 				"autoWidth": false,
-				/*"columnDefs": [
-					{ "orderable": false, "targets": 1 } // disable sorting on the "INI" Initials column
-				],*/
-				// "sDom": 'rtlfip', // uncomment to move filter to bottom of table
+				"columnDefs": [
+					{ "orderable": false, "targets": 6 } // disable sorting on the "Links" column
+				],
 				"language": {
 					search: '<i class="fa fa-filter" aria-hidden="true"></i>  ',
 					searchPlaceholder: 'filter customers'
