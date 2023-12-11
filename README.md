@@ -210,7 +210,7 @@ let data_customers = {
 
 For the main modules (Financials, Procurement, Projects, HCM, Payroll, Common), `What's New` Release Docs are shown in a table under the `Oracle Release Docs` heading, linking through to the release docs for release A, B, C and D for year year from 2019 through to current + 1 year (e.g. as of 6th December 2023, the release docs go up to Release 24D for 2024).
 
-Useful as allows you to filter on module / year / release label to narrow down which set Release Docs to return.
+Useful as allows you to filter on year / release label to narrow down which set Release Docs to return.
 
 ### Release Docs JSON
 
@@ -226,49 +226,39 @@ The Release Docs table is held in JSON format - edit as required if you want to 
 let data_modules = {
 	"modules": [{
 		"module_name": "Financials",
-		"parent_label": "ERP",
+		"label": "FIN",
 		"module_url_tag_1": "fin",
 		"module_url_tag_2": "financials"
 		},{
-		"module_name": "Human Resources Cloud",
-		"parent_label": "HCM",
-		"module_url_tag_1": "ghr",
-		"module_url_tag_2": "global-hr"
-		},{
-		"module_name": "Human Resources Helpdesk",
-		"parent_label": "HCM",
-		"module_url_tag_1": "hr-helpdesk",
-		"module_url_tag_2": "hr-helpdesk"
-		},{
-		"module_name": "HCM Cloud Common",
-		"parent_label": "HCM",
-		"module_url_tag_1": "hcmcommon",
-		"module_url_tag_2": "hcm-common"
-		},{
-		"module_name": "Oracle Common Technologies and User Experience",
-		"parent_label": "Common",
-		"module_url_tag_1": "common",
-		"module_url_tag_2": "common"
-		},{
-		"module_name": "Payroll",
-		"parent_label": "HCM",
-		"module_url_tag_1": "payroll",
-		"module_url_tag_2": "payroll"
-		},{
 		"module_name": "Procurement",
-		"parent_label": "SCM",
+		"label": "SCM",
 		"module_url_tag_1": "proc",
 		"module_url_tag_2": "procurement"
 		},{
 		"module_name": "Project Management",
-		"parent_label": "ERP",
+		"label": "PPM",
 		"module_url_tag_1": "ppm",
 		"module_url_tag_2": "ppm"
 		},{
-		"module_name": "Self Service Procurement",
-		"parent_label": "SCM",
-		"module_url_tag_1": "ssproc",
-		"module_url_tag_2": "ssproc"
+		"module_name": "Oracle Common Technologies and User Experience",
+		"label": "Common",
+		"module_url_tag_1": "common",
+		"module_url_tag_2": "common"
+		},{
+		"module_name": "Human Resources Cloud",
+		"label": "HCM",
+		"module_url_tag_1": "ghr",
+		"module_url_tag_2": "global-hr"
+		},{
+		"module_name": "Payroll",
+		"label": "PAYROLL",
+		"module_url_tag_1": "payroll",
+		"module_url_tag_2": "payroll"
+		},{
+		"module_name": "HCM Cloud Common",
+		"label": "HCM-Common",
+		"module_url_tag_1": "hcmcommon",
+		"module_url_tag_2": "hcm-common"
 		}
 	]
  };
