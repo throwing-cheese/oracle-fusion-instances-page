@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -21,8 +22,7 @@
 		table.dataTable{width: auto; min-width: 0; display: table;}
 		td, th {vertical-align: top;}
 		td{font-size:12px;}
-		.css_this_year{border-left:3px solid red !important;}
-		.css_not_this_year{background:transparent;}
+		.css_this_year::before {content: " 🔴 ";}
 		.dataTables_filter{float:left !important; margin-bottom:10px;border:1px solid #ccc;padding:2px;border-radius:2px;}
 		.environment_row{padding:0 0 0 0; text-align:left; border-bottom:1px solid black; border-right:1px solid black;}
 		.even:hover{background:yellow !important;}
@@ -30,11 +30,11 @@
 		.href_non_prod{padding:0 5px 0 5px; text-align:center;}
 		.href_prod:visited{background-color:red;color:white;}
 		.href_prod{padding:0 5px 0 5px; text-align:center;}
-		.instances {padding:0 5px 0 5px; border-radius: 0px; text-align:center; opacity: 1.0; border-bottom:1px solid black; border-right:1px solid black;display:block;}
 		.odd:hover{background:yellow !important;}
-		.page-header h3{border-bottom:1px solid #ccc;}
-		.page-header{margin-top:10px;}
 		.prod{color:#fff;background:#000;}
+		.bar{border-bottom:1px solid black;}
+		.docs{background-color:white;padding:0 5px 0 5px; text-align:center;}
+		.docs:visited{color:white;background-color:purple;}
 	</style>
   </head>
   <body>
@@ -126,9 +126,7 @@
 
 		<hr />
 		
-		<div class="page-header">
-			<h4 id="anchor_cohorts">Release Cohorts [<a href="#top">top</a>]</h4>
-		</div>
+		<h4 id="anchor_cohorts">Release Cohorts [<a href="#top">top</a>]</h4>
 		
 		<p>Every quarter, Oracle updates an organisation's environments with fixes and new features. Changes may include customer enhancements, legislative changes and updates to the underlying technology stack.</p>
 		
@@ -195,10 +193,7 @@
 					<th>Release</th>
 					<th>Version</th>
 					<th>Date</th>
-					<th>Parent</th>
-					<th>Label</th>
-					<th>Current</th>
-					<th>Module</th>
+					<th>Modules</th>
 				</tr>
 			</thead>
 			<tbody id="release_rows">
@@ -608,49 +603,39 @@
 		let data_modules = {
 			"modules": [{
 				"module_name": "Financials",
-				"parent_label": "ERP",
+				"label": "FIN",
 				"module_url_tag_1": "fin",
 				"module_url_tag_2": "financials"
 				},{
-				"module_name": "Human Resources Cloud",
-				"parent_label": "HCM",
-				"module_url_tag_1": "ghr",
-				"module_url_tag_2": "global-hr"
-				},{
-				"module_name": "Human Resources Helpdesk",
-				"parent_label": "HCM",
-				"module_url_tag_1": "hr-helpdesk",
-				"module_url_tag_2": "hr-helpdesk"
-				},{
-				"module_name": "HCM Cloud Common",
-				"parent_label": "HCM",
-				"module_url_tag_1": "hcmcommon",
-				"module_url_tag_2": "hcm-common"
-				},{
-				"module_name": "Oracle Common Technologies and User Experience",
-				"parent_label": "Common",
-				"module_url_tag_1": "common",
-				"module_url_tag_2": "common"
-				},{
-				"module_name": "Payroll",
-				"parent_label": "HCM",
-				"module_url_tag_1": "payroll",
-				"module_url_tag_2": "payroll"
-				},{
 				"module_name": "Procurement",
-				"parent_label": "SCM",
+				"label": "SCM",
 				"module_url_tag_1": "proc",
 				"module_url_tag_2": "procurement"
 				},{
 				"module_name": "Project Management",
-				"parent_label": "ERP",
+				"label": "PPM",
 				"module_url_tag_1": "ppm",
 				"module_url_tag_2": "ppm"
 				},{
-				"module_name": "Self Service Procurement",
-				"parent_label": "SCM",
-				"module_url_tag_1": "ssproc",
-				"module_url_tag_2": "ssproc"
+				"module_name": "Oracle Common Technologies and User Experience",
+				"label": "Common",
+				"module_url_tag_1": "common",
+				"module_url_tag_2": "common"
+				},{
+				"module_name": "Human Resources Cloud",
+				"label": "HCM",
+				"module_url_tag_1": "ghr",
+				"module_url_tag_2": "global-hr"
+				},{
+				"module_name": "Payroll",
+				"label": "PAYROLL",
+				"module_url_tag_1": "payroll",
+				"module_url_tag_2": "payroll"
+				},{
+				"module_name": "HCM Cloud Common",
+				"label": "HCM-Common",
+				"module_url_tag_1": "hcmcommon",
+				"module_url_tag_2": "hcm-common"
 				}
 			]
 		 };
@@ -690,10 +675,8 @@
 			
 			if(loop_year === yyyy) {
 				var_current_year_css = "css_this_year";
-				var_current_year_label = "yes";
 			} else {
-				var_current_year_css = "css_not_this_year";
-				var_current_year_label = "";
+				var_current_year_css = "";
 			}
 			
 			// colour loop logic
@@ -710,13 +693,14 @@
 			// #####################################################################
 			for (var x = 0; x < release_array_length; x++) {
 				
-				let modules_loop_counter = 1;
+				// loop tracker
+				let release_mod = x % release_array_length;
+				if(release_mod === 3) {
+					css_bar = " bar";
+				} else {
+					css_bar = "";
+				}
 				
-				// how many different css shades per colour
-				let css_color_counter = 9;
-				// alert(release_colour);
-				let module_css = "bd-" + release_colour + "-100";
-
 				// current release
 				loop_release = release_array[x];
 
@@ -733,48 +717,38 @@
 					loop_release_month = "Oct";
 					loop_release_number = "10";
 				}
+				
+				let release_version = "11.13." + loop_year_yy + "." + loop_release_number + ".0";
+				let release_label = loop_year_yy + loop_release;
+				let release_date = loop_release_month + "-" + loop_year_yy;
+				module_css = "bd-" + release_colour + "-100";
+				
+				release_docs_rows_html += '<tr>';
+				release_docs_rows_html += '<td class="' + module_css + ' ' + css_bar + '"><span class="' + var_current_year_css + '">' + release_label + '</span></td>';
+				release_docs_rows_html += '<td class="' + module_css + ' ' + css_bar + '"><code>' + release_version + '</code></td>';
+				release_docs_rows_html += '<td class="' + module_css + ' ' + css_bar + '">' + release_date + '</td><td class=" ' + css_bar + '">';
 
 				// [03] loop through the modules for this release
 				// #####################################################################
 				for (let module_key in data_modules.modules) {
 
+					let release_docs_modules_html = '';
 					let module_url = "https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/cloud/r13/wn/@tag1/releases/@release1/@release2-@tag2-wn.htm";
 					let obj = data_modules.modules[module_key];
 					let module_name = obj.module_name;
-					let parent_label = obj.parent_label;
+					let label = obj.label;
 					let module_url_tag_1 = obj.module_url_tag_1;
 					let module_url_tag_2 = obj.module_url_tag_2;
-					let release_label = loop_year_yy + loop_release;
 					let release_label_url = release_label.toLowerCase();
-					let release_date = loop_release_month + "-" + loop_year_yy;
-
-					css_colour_number = modules_loop_counter * 100;
-					module_css = "bd-" + release_colour + "-" + css_colour_number;
-					module_link_css = "href_module"
 					module_url = module_url.replace('@tag1', module_url_tag_1);
 					module_url = module_url.replace('@tag2', module_url_tag_2);
 					module_url = module_url.replace('@release1', release_label_url);
-					module_url = module_url.replace('@release2', release_label_url);
-					module_name_link = '<a title = "' + module_url + '" href="' + module_url + '" class="' + module_link_css + ' ' + module_css + '">' + module_name + ' (' + release_label + ')</a>';
-					
-					let release_version = "11.13." + loop_year_yy + "." + loop_release_number + ".0";
-					
-					if (modules_loop_counter > css_color_counter) {
-						modules_loop_counter = modules_loop_counter % css_color_counter;
-					}
-					
-					release_docs_rows_html += '<tr>';
-					release_docs_rows_html += '<td class="' + var_current_year_css + '">' + release_label + '</td>';
-					release_docs_rows_html += '<td><code>' + release_version + '</code></td>';
-					release_docs_rows_html += '<td>' + release_date + '</td>';
-					release_docs_rows_html += '<td>' + parent_label + '</td>';
-					release_docs_rows_html += '<td>' + module_url_tag_1 + '</td>';
-					release_docs_rows_html += '<td>' + var_current_year_label + '</td>';
-					release_docs_rows_html += '<td class="module_row ' + module_css + '">' + module_name_link + '</td>';
-					release_docs_rows_html += '</tr>';
-					modules_loop_counter++;
-
+					module_url = module_url.replace('@release2', release_label_url);				
+					release_docs_modules_html += ' <a style="text-decoration:none;" href="' + module_url + '" class="docs" title="' + module_name + ' ' + release_label + '")>' + label + '</a> / ';				
+					release_docs_rows_html += release_docs_modules_html;
 				}
+				
+				release_docs_rows_html += '</td></tr>';
 				
 				document.getElementById('release_rows').innerHTML = release_docs_rows_html;
 
@@ -790,7 +764,7 @@
 		
 			$('#customer_info').DataTable( {
 				paging: false,
-				"order": [[0, 'asc']],
+				"order": [[0, 'desc']],
 				responsive: true,
 				"scrollX": false,
 				"autoWidth": false,
@@ -805,13 +779,13 @@
 
 			$('#release_docs').DataTable( {
 				paging: false,
-				"order": [[0, 'desc']],
+				"order": [[0, 'asc']],
 				responsive: true,
 				"scrollX": false,
 				"autoWidth": false,
-				/*"columnDefs": [
-					{ "orderable": false, "targets": 1 } // disable sorting on the "INI" Initials column
-				],*/
+				"columnDefs": [
+					{ "orderable": false, "targets": 3 } // disable sorting on the "Modules" column
+				],
 				// "sDom": 'rtlfip', // uncomment to move filter to bottom of table
 				"language": {
 					search: '<i class="fa fa-filter" aria-hidden="true"></i>  ',
