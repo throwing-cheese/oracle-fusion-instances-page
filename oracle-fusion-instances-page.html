@@ -675,6 +675,8 @@
 					// if more instances than there are colours, reset the colour loop counter
 					if (colour_loop_counter > css_color_counter) {
 						colour_loop_counter = instances_loop_counter % css_color_counter;
+						//take 1 off modulus value to ensure reset colour gradient
+						colour_loop_counter--;
 					}
 					
 					// add border to table row if moving from one customer to the next
