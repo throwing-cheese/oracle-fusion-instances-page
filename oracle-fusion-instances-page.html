@@ -317,13 +317,11 @@
 	<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 	<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
 	<script>
-		
-		// @@@@@@@@@@@@@@@@@@@@@@@@@@
-		// customer instances
-		// @@@@@@@@@@@@@@@@@@@@@@@@@@
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// CUSTOMER INSTANCES
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 		// data for customers and customer instances in JSON format
-
 		let data_customers = {
 			"customers": [{
 				"name": "Generic Corp One",
@@ -469,7 +467,6 @@
 		 };
 		 
 		// date variables
-		
 		let today = new Date();
 		let dd = today.getDate();
 		let mm = today.getMonth()+1; 
@@ -478,12 +475,10 @@
 		let today_date = new Date(today);
 
 		// initial variables
-		
 		let customer_links_rows_html = ''; // html table rows
 		let colour_loop_counter = 0; // colour loop counter
 
 		// colours array
-		
 		const colour_array = ["blue","indigo","purple","pink","red","orange","yellow","green","teal","cyan","gray"];
 		let colour_array_length = colour_array.length;
 	
@@ -504,9 +499,9 @@
 			let customer_wave = obj.wave;
 	
 			// colour loop logic
-
 			let instance_colour = colour_array[colour_loop_counter];
 			
+			// if number of instances is > number of colours available, reset instance colour using modulus so can keep using colours
 			if (instance_colour === undefined) {
 			 	let colour_modulus_value = colour_loop_counter % colour_array_length;
 				instance_colour = colour_array[colour_modulus_value];
@@ -529,22 +524,21 @@
 				
 				for (let inst_key in obj.instances) {
 					
-					let cloned_output;
-					let difference;
-					let ago;
+					let instance_link_class;
 					let instance_css;
-					let cloned_length = 0;
+					let prod_emoji;
+					let ago;
 					let instance_data = obj.instances[inst_key];
 					let url = instance_data.url;
 					let label = instance_data.label;
-					let prod_emoji;
+					let instance_links_html = '';
 					
 					// if more instances than there are colours, reset the colour loop counter
 					if (colour_loop_counter > css_color_counter) {
 						colour_loop_counter = instances_loop_counter % css_color_counter;
 					}
 					
-					// set CSS to add black table cell border below each customer
+					// add border to table row if moving from one customer to the next
 					if(instances_count === instances_loop_counter) {
 						css_bar = " bar";
 					} else {
@@ -557,15 +551,15 @@
 					// get cloned date and then work out how long ago the clone date was
 					let cloned = instance_data.cloned;
 					if(cloned) {
-						cloned_date = new Date(cloned);
-						difference = today_date - cloned_date;
-						difference_calc = Math.floor(difference/(1000*3600*24)) + 1;
+						let cloned_date = new Date(cloned);
+						let difference = today_date - cloned_date;
+						let difference_calc = Math.floor(difference/(1000*3600*24)) + 1;
 						if(difference_calc > 1) {
 							var_unit = "days";
 						} else {
 							var_unit = "day";
 						}
-						cloned_output = new Date(cloned).toDateString();
+						let cloned_output = new Date(cloned).toDateString();
 						ago = " <span title='number of days ago' style='color:#999;background:yellow;'>(" + difference_calc + ")</span>";
 					}
 					
@@ -585,36 +579,62 @@
 					}
 					
 					// build URLs for each instance
-					
-					let home_url = "https://" + url + ".oraclecloud.com/fscmUI/faces/FuseWelcome";
-					let home_url_title = initials + ' ' + label + ' ' + 'Fusion Homepage';
-					
-					let sql_url = "https://" + url + ".oraclecloud.com/analytics/saw.dll?catalog";
-					let sql_url_title = initials + ' ' + label + ' ' + 'SQL Catalog';
-					
-					let bpm_url = "https://" + url + ".oraclecloud.com/integration/worklistapp/faces/home.jspx";
-					let bpm_url_title = initials + ' ' + label + ' ' + 'BPM Worklist';
-					
-					let bpm_admin_url = "https://" + url + ".oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=administration";
-					let bpm_admin_url_title = initials + ' ' + label + ' ' + 'BPM Admin Home';
-					
-					let bpm_appr_gps_url = "https://" + url + ".oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=approvalGroup";
-					let bpm_appr_gps_url_title = initials + ' ' + label + ' ' + 'BPM Approval Groups';
-					
-					let bpm_tasks_url = "https://" + url + ".oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=taskConfig";
-					let bpm_tasks_url_title = initials + ' ' + label + ' ' + 'BPM Approval Tasks';
-					
-					let fsm_url = "https://" + url + ".oraclecloud.com/fscmUI/faces/FuseTaskListManagerTop";
-					let fsm_url_title = initials + ' ' + label + ' ' + 'Setup and Maintenance';
-					
-					let cs_url = "https://" + url + ".oraclecloud.com/cs";
-					let cs_url_title = initials + ' ' + label + ' ' + 'Content Server';
-					
-					let img_url = "https://" + url + ".oraclecloud.com/imaging/";
-					let img_url_title = initials + ' ' + label + ' ' + 'Imaging Homepage';
-					
-					let bi_history = "https://" + url + ".oraclecloud.com/analytics/saw.dll?bipublisherEntry&Action=history";
-					let bi_history_title = initials + ' ' + label + ' ' + 'BI History Search';
+					let instance_urls = {
+						"fusion_links": [{
+							"fusion_link_text": "Home",
+							"fusion_link_title": "Fusion Homepage",
+							"fusion_link": "https://@url.oraclecloud.com/fscmUI/faces/FuseWelcome"
+							},{
+							"fusion_link_text": "SQL",
+							"fusion_link_title": "SQL Catalog",
+							"fusion_link": "https://@url.oraclecloud.com/analytics/saw.dll?catalog"
+							},{
+							"fusion_link_text": "Maint",
+							"fusion_link_title": "Setup and Maintenance",
+							"fusion_link": "https://@url.oraclecloud.com/fscmUI/faces/FuseTaskListManagerTop"
+							},{
+							"fusion_link_text": "Worklist",
+							"fusion_link_title": "BPM Worklist",
+							"fusion_link": "https://@url.oraclecloud.com/integration/worklistapp/faces/home.jspx"
+							},{
+							"fusion_link_text": "Admin",
+							"fusion_link_title": "BPM Admin Home",
+							"fusion_link": "https://@url.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=administration"
+							},{
+							"fusion_link_text": "Groups",
+							"fusion_link_title": "BPM Approval Groups",
+							"fusion_link": "https://@url.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=approvalGroup"
+							},{
+							"fusion_link_text": "Tasks",
+							"fusion_link_title": "BPM Approval Tasks",
+							"fusion_link": "https://@url.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=taskConfig"
+							},{
+							"fusion_link_text": "CS",
+							"fusion_link_title": "Content Server",
+							"fusion_link": "https://@url.oraclecloud.com/cs"
+							},{
+							"fusion_link_text": "Img",
+							"fusion_link_title": "Imaging Homepage",
+							"fusion_link": "https://@url.oraclecloud.com/imaging/"
+							},{
+							"fusion_link_text": "History",
+							"fusion_link_title": "BI History Search",
+							"fusion_link": "https://@url.oraclecloud.com/analytics/saw.dll?bipublisherEntry&Action=history"
+							}
+						]
+					 };
+					 
+					// [02a] loop through the links for this instance
+					// #####################################################################
+					for (let url_key in instance_urls.fusion_links) {
+						let obj = instance_urls.fusion_links[url_key];
+						let fusion_link_text = obj.fusion_link_text;
+						let fusion_link = obj.fusion_link;
+						let fusion_link_title = obj.fusion_link_title;
+						fusion_link_title = initials + ' ' + label + ' ' + fusion_link_title;
+						module_url = fusion_link.replace('@url', url);
+						instance_links_html += '<a title="' + fusion_link_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + module_url + '">' + fusion_link_text + '</a>|'
+					}
 					
 					// build up table row and table cell HTML variable.
 
@@ -629,17 +649,7 @@
 					} else {
 						customer_links_rows_html += '<td class="' + css_bar + '"></td>';
 					}
-					customer_links_rows_html += '<td class="environment_row ' + instance_css + '">' + prod_emoji + ' ';
-					customer_links_rows_html += '<a title="' + home_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + home_url + '">Home</a>/';
-					customer_links_rows_html += '<a title="' + sql_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + sql_url + '">SQL</a>/';
-					customer_links_rows_html += '<a title="' + fsm_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + fsm_url + '">S&M</a>/';
-					customer_links_rows_html += '<a title="' + bpm_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + bpm_url + '">WL</a>/';
-					customer_links_rows_html += '<a title="' + bpm_admin_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + bpm_admin_url + '">ADM</a>/';
-					customer_links_rows_html += '<a title="' + bpm_tasks_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + bpm_tasks_url + '">TASKS</a>/';
-					customer_links_rows_html += '<a title="' + bpm_appr_gps_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + bpm_appr_gps_url + '">GPS</a>/';
-					customer_links_rows_html += '<a title="' + cs_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + cs_url + '">CS</a>/';
-					customer_links_rows_html += '<a title="' + img_url_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + img_url + '">Img</a>/';
-					customer_links_rows_html += '<a title="' + bi_history_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + bi_history + '">History</a>';
+					customer_links_rows_html += '<td class="environment_row ' + instance_css + '">' + prod_emoji + ' ' + instance_links_html;
 					customer_links_rows_html += '</td>';
 					customer_links_rows_html += '</tr>';
 					colour_loop_counter++;
@@ -657,12 +667,11 @@
 			
 		}
 		
-		// @@@@@@@@@@@@@@@@@@@@@@@@@@
-		// oracle release docs
-		// @@@@@@@@@@@@@@@@@@@@@@@@@@
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// ORACLE RELEASE DOCS
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
 		// data for modules in a release
-		
 		let data_modules = {
 			"modules": [{
 				"module_name": "Financials",
@@ -724,7 +733,10 @@
 		  return years;
 		}
 
+		// build year array
 		var year_array = generateArrayOfYears();
+		
+		// get year array length
 		let year_array_length = year_array.length;
 	
 		// [01] loop through years array
@@ -736,6 +748,7 @@
 			loop_year_string = loop_year.toString(); // convert year number to string otherwise slice doesn't work
 			loop_year_yy = loop_year_string.slice(-2); // get last 2 digits of year
 			
+			// if release is for current year set CSS marker so the release will have a red emoji dot in front of i t
 			if(loop_year === yyyy) {
 				var_current_year_css = "css_this_year";
 			} else {
@@ -743,7 +756,6 @@
 			}
 			
 			// colour loop logic
-
 			let release_colour = colour_array[colour_loop_counter];
 			
 			// if more years than colours defined, reset colours otherwise colour from array will have a value of undefined
@@ -756,7 +768,7 @@
 			// #####################################################################
 			for (var x = 0; x < release_array_length; x++) {
 				
-				// loop tracker
+				// loop tracker - add border to table row if moving from one release to the next
 				let release_mod = x % release_array_length;
 				if(release_mod === 3) {
 					css_bar = " bar";
@@ -766,7 +778,8 @@
 				
 				// current release
 				loop_release = release_array[x];
-
+				
+				// set labels for current release
 				if(loop_release === "A") {
 					loop_release_month = "Jan";
 					loop_release_number = "01";
@@ -784,8 +797,11 @@
 				let release_version = "11.13." + loop_year_yy + "." + loop_release_number + ".0";
 				let release_label = loop_year_yy + loop_release;
 				let release_date = loop_release_month + "-" + loop_year_yy;
-				module_css = "bd-" + release_colour + "-100";
 				
+				// set colour for this release
+				let module_css = "bd-" + release_colour + "-100";
+				
+				// build HTML for the table row for this release
 				release_docs_rows_html += '<tr>';
 				release_docs_rows_html += '<td class="' + module_css + ' ' + css_bar + '"><span class="' + var_current_year_css + '">' + release_label + '</span></td>';
 				release_docs_rows_html += '<td class="' + module_css + ' ' + css_bar + '"><code>' + release_version + '</code></td>';
@@ -794,7 +810,6 @@
 				// [03] loop through the modules for this release
 				// #####################################################################
 				for (let module_key in data_modules.modules) {
-
 					let release_docs_modules_html = '';
 					let module_url = "https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/cloud/r13/wn/@tag1/releases/@release1/@release2-@tag2-wn.htm";
 					let obj = data_modules.modules[module_key];
@@ -813,6 +828,7 @@
 				
 				release_docs_rows_html += '</td></tr>';
 				
+				// set HTML content for DIV with ID value of "release_rows" - to contain the HTML defined via the javascript loops
 				document.getElementById('release_rows').innerHTML = release_docs_rows_html;
 
 			}
@@ -821,7 +837,9 @@
 
 		}
 		
-		// set up data tables
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// INITIALISE DATA TABLES
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 		$(document).ready(function() {
 		
@@ -858,7 +876,5 @@
 		});
 	
 	</script>
-	
-
   </body>
 </html>
