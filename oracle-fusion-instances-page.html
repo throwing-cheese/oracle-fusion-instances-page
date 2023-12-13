@@ -32,7 +32,7 @@
 		.odd:hover{background:yellow !important;}
 		.prod{color:#fff;background:#000;}
 		.bar{border-bottom:1px solid black;}
-		.docs{background-color:white;padding:0 5px 0 5px; text-align:center;}
+		.docs{padding:0 5px 0 5px; text-align:center;}
 		.docs:visited{color:white;background-color:purple;}
 	</style>
   </head>
@@ -104,7 +104,7 @@
 	
 		<h1>Oracle Fusion Instances Page</h1>
 	
-		<small><a href="#anchor_customer_links">Customer Links</a> / <a href="#anchor_cohorts">Release Cohorts</a> / <a href="#anchor_oracle_release_docs">Oracle Release Docs</a> / <a href="#anchor_support_links">Support Shortcuts</a></small>
+		<small><a href="#anchor_customer_links">Customer Links</a> / <a href="#anchor_oracle_release_docs">Oracle Release Docs</a> / <a href="#anchor_cohorts">Release Cohorts</a> / <a href="#anchor_support_links">Support Shortcuts</a></small>
 		
 		<hr />
 		
@@ -146,7 +146,36 @@
 			
 			<div class="accordion-item">
 			
-				<h2 class="accordion-header" id="anchor_cohorts"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_cohorts" aria-expanded="true" aria-controls="collapse_cohorts">2️⃣ Release Cohorts</button></h2>
+				<h2 class="accordion-header" id="anchor_oracle_release_docs"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_release_docs" aria-expanded="true" aria-controls="collapse_release_docs">2️⃣  Release Docs</button></h2>
+				
+				<div id="collapse_release_docs" class="accordion-collapse collapse show" aria-labelledby="anchor_oracle_release_docs" data-bs-parent="#oracle_info">
+				
+					<div class="accordion-body">
+				
+						<table id="release_docs" style="margin-right:auto;margin-left:0px;" class="cell-border compact">
+							<thead>
+								<tr>
+									<th>Release</th>
+									<th>Version</th>
+									<th>Date</th>
+									<th>Modules</th>
+								</tr>
+							</thead>
+							<tbody id="release_rows">
+							</tbody>
+						</table>
+
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<!-- ////////////////////////////////// -->
+			
+			<div class="accordion-item">
+			
+				<h2 class="accordion-header" id="anchor_cohorts"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_cohorts" aria-expanded="true" aria-controls="collapse_cohorts">3️⃣  Release Cohorts</button></h2>
 				
 				<div id="collapse_cohorts" class="accordion-collapse collapse show" aria-labelledby="anchor_cohorts" data-bs-parent="#oracle_info">
 				
@@ -156,18 +185,6 @@
 						
 						<p>An organisation's cohort determines when the quarterly update is applied to their pods:</p>
 						
-						<ul>
-							<li>Cohort A: February-May-August-November</li>
-							<li>Cohort B: March-June-September-December</li>
-							<li>Cohort C: April-July-October-January</li>
-						</ul>
-						
-						<p>Stage pods are updated on the first Friday of an organisation's quarterly update month. Production pods are updated two weeks later on the third Friday of the month.</p>
-						
-						<p>Quarterly update names combine the year and A, B, C or D. For example, the release for the first quarter of 2023 is 23A; the release for the second quarter of 2023 is 23B; and the release for the first quarter of 2024 will be 24A.</p>
-						
-						<p>Quarterly updates cannot be delayed or skipped. This ensures that all customers use the most up-to-date and certified versions of the applications.</p>
-
 						<table id="waves" style="width:200px;" class="table table-striped-columns table-sm table-hover">
 							<thead>
 								<tr>
@@ -206,35 +223,14 @@
 								</tr>
 							</tbody>
 						</table>
-
-					</div>
-					
-				</div>
-				
-			</div>
-			
-			<!-- ////////////////////////////////// -->
-			
-			<div class="accordion-item">
-			
-				<h2 class="accordion-header" id="anchor_oracle_release_docs"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_release_docs" aria-expanded="true" aria-controls="collapse_release_docs">3️⃣ Release Docs</button></h2>
-				
-				<div id="collapse_release_docs" class="accordion-collapse collapse show" aria-labelledby="anchor_oracle_release_docs" data-bs-parent="#oracle_info">
-				
-					<div class="accordion-body">
-				
-						<table id="release_docs" style="margin-right:auto;margin-left:0px;" class="cell-border compact">
-							<thead>
-								<tr>
-									<th>Release</th>
-									<th>Version</th>
-									<th>Date</th>
-									<th>Modules</th>
-								</tr>
-							</thead>
-							<tbody id="release_rows">
-							</tbody>
-						</table>
+						
+						<p>Stage pods are updated on the first Friday of an organisation's quarterly update month. Production pods are updated two weeks later on the third Friday of the month.</p>
+						
+						<p>Quarterly update names combine the year and A, B, C or D. For example, the release for the first quarter of 2023 is 23A; the release for the second quarter of 2023 is 23B; and the release for the first quarter of 2024 will be 24A.</p>
+						
+						<p>Quarterly updates cannot be delayed or skipped. This ensures that all customers use the most up-to-date and certified versions of the applications.</p>
+						
+						<small>Source: <a href="https://blogs.oracle.com/erp-ace/post/harness-the-business-value-of-quarterly-updates">Oracle Blog: Harness the Business Value of Quarterly Updates</a></small>
 
 					</div>
 					
@@ -318,7 +314,51 @@
 	<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
 	<script>
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// CUSTOMER INSTANCES
+		// GENERAL VARIABLES
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		
+		// date variables
+		let today = new Date();
+		let dd = today.getDate();
+		let mm = today.getMonth()+1; 
+		let yyyy = today.getFullYear();
+		today = yyyy + '-' + mm + '-' + dd;
+		let today_date = new Date(today);
+
+		// colour loop counter
+		let colour_loop_counter = 0;
+		
+		// how many different css shades per colour
+		let css_color_counter = 9;
+
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// ARRAYS
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		// colours array
+		const colour_array = ["blue","indigo","purple","pink","red","orange","yellow","green","teal","cyan","gray"];
+		
+		// get number of elements in array
+		let colour_array_length = colour_array.length;
+
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// FUNCTIONS
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		// years array (https://renatello.com/javascript-array-of-years/)
+		function generateArrayOfYears() {
+		  var min = 2019;
+		  var max = new Date().getFullYear() + 1; // include next year's release docs
+		  var years = []; // empty years array
+
+		  for (var i = min; i <= max; i++) {
+			years.push(i);
+		  }
+		  return years;
+		}
+
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// JSON DATA
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 		// data for customers and customer instances in JSON format
@@ -465,25 +505,125 @@
 				]}
 			]
 		 };
-		 
-		// date variables
-		let today = new Date();
-		let dd = today.getDate();
-		let mm = today.getMonth()+1; 
-		let yyyy = today.getFullYear();
-		today = yyyy + '-' + mm + '-' + dd;
-		let today_date = new Date(today);
 
-		// initial variables
-		let customer_links_rows_html = ''; // html table rows
-		let colour_loop_counter = 0; // colour loop counter
+		// URLs for each instance
+		let instance_urls = {
+			"fusion_links": [{
+				"fusion_link_text": "Home",
+				"fusion_link_title": "Fusion Homepage",
+				"fusion_link": "https://@url.oraclecloud.com/fscmUI/faces/FuseWelcome"
+				},{
+				"fusion_link_text": "SQL",
+				"fusion_link_title": "SQL Catalog",
+				"fusion_link": "https://@url.oraclecloud.com/analytics/saw.dll?catalog"
+				},{
+				"fusion_link_text": "Maint",
+				"fusion_link_title": "Setup and Maintenance",
+				"fusion_link": "https://@url.oraclecloud.com/fscmUI/faces/FuseTaskListManagerTop"
+				},{
+				"fusion_link_text": "Worklist",
+				"fusion_link_title": "BPM Worklist",
+				"fusion_link": "https://@url.oraclecloud.com/integration/worklistapp/faces/home.jspx"
+				},{
+				"fusion_link_text": "Admin",
+				"fusion_link_title": "BPM Admin Home",
+				"fusion_link": "https://@url.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=administration"
+				},{
+				"fusion_link_text": "Groups",
+				"fusion_link_title": "BPM Approval Groups",
+				"fusion_link": "https://@url.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=approvalGroup"
+				},{
+				"fusion_link_text": "Tasks",
+				"fusion_link_title": "BPM Approval Tasks",
+				"fusion_link": "https://@url.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=taskConfig"
+				},{
+				"fusion_link_text": "CS",
+				"fusion_link_title": "Content Server",
+				"fusion_link": "https://@url.oraclecloud.com/cs"
+				},{
+				"fusion_link_text": "Img",
+				"fusion_link_title": "Imaging Homepage",
+				"fusion_link": "https://@url.oraclecloud.com/imaging/"
+				},{
+				"fusion_link_text": "History",
+				"fusion_link_title": "BI History Search",
+				"fusion_link": "https://@url.oraclecloud.com/analytics/saw.dll?bipublisherEntry&Action=history"
+				}
+			]
+		 };
 
-		// colours array
-		const colour_array = ["blue","indigo","purple","pink","red","orange","yellow","green","teal","cyan","gray"];
-		let colour_array_length = colour_array.length;
+		// data for modules in a release
+		let data_modules = {
+			"modules": [{
+				"module_name": "Financials",
+				"label": "FIN",
+				"module_url_tag_1": "fin",
+				"module_url_tag_2": "financials"
+				},{
+				"module_name": "Procurement",
+				"label": "SCM",
+				"module_url_tag_1": "proc",
+				"module_url_tag_2": "procurement"
+				},{
+				"module_name": "Project Management",
+				"label": "PPM",
+				"module_url_tag_1": "ppm",
+				"module_url_tag_2": "ppm"
+				},{
+				"module_name": "Oracle Common Technologies and User Experience",
+				"label": "Common",
+				"module_url_tag_1": "common",
+				"module_url_tag_2": "common"
+				},{
+				"module_name": "Human Resources Cloud",
+				"label": "HCM",
+				"module_url_tag_1": "ghr",
+				"module_url_tag_2": "global-hr"
+				},{
+				"module_name": "Payroll",
+				"label": "PAYROLL",
+				"module_url_tag_1": "payroll",
+				"module_url_tag_2": "payroll"
+				},{
+				"module_name": "HCM Cloud Common",
+				"label": "HCM-Common",
+				"module_url_tag_1": "hcmcommon",
+				"module_url_tag_2": "hcm-common"
+				}
+			]
+		 };
+		
+		// data for releases in a year
+		let data_releases = {
+			"releases": [{
+				"release_letter": "A",
+				"release_month": "Jan",
+				"release_number": "01"
+				},{
+				"release_letter": "B",
+				"release_month": "Apr",
+				"release_number": "04"
+				},{
+				"release_letter": "C",
+				"release_month": "Jul",
+				"release_number": "07"
+				},{
+				"release_letter": "A",
+				"release_month": "Oct",
+				"release_number": "10"
+				}
+			]
+		 };
+
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// CUSTOMER INSTANCES
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
 		// [01] loop through the customers
 		// #####################################################################
+
+		// html table rows for customer data
+		let customer_links_rows_html = '';
 		
 		for (let customer_key in data_customers.customers) {
 			let obj = data_customers.customers[customer_key];
@@ -512,12 +652,12 @@
 			
 				let instances = obj.instances;
 				let instances_count = instances.length;
-				let instances_loop_counter = 1; // instances loop counter
-				let colour_loop_counter = instances_loop_counter; // colour loop counter is same as instances loop counter to start with
-				let foo = "";
 				
-				// how many different css shades per colour
-				let css_color_counter = 9;
+				// instances loop counter
+				let instances_loop_counter = 1;
+				
+				// colour loop counter is same as instances loop counter to start with
+				let colour_loop_counter = instances_loop_counter;
 				
 				// [02] loop through the instances
 				// #####################################################################
@@ -531,7 +671,6 @@
 					let instance_data = obj.instances[inst_key];
 					let url = instance_data.url;
 					let label = instance_data.label;
-					let instance_links_html = '';
 					
 					// if more instances than there are colours, reset the colour loop counter
 					if (colour_loop_counter > css_color_counter) {
@@ -577,55 +716,12 @@
 						instance_link_class = "href_non_prod";
 						prod_emoji = '';
 					}
-					
-					// build URLs for each instance
-					let instance_urls = {
-						"fusion_links": [{
-							"fusion_link_text": "Home",
-							"fusion_link_title": "Fusion Homepage",
-							"fusion_link": "https://@url.oraclecloud.com/fscmUI/faces/FuseWelcome"
-							},{
-							"fusion_link_text": "SQL",
-							"fusion_link_title": "SQL Catalog",
-							"fusion_link": "https://@url.oraclecloud.com/analytics/saw.dll?catalog"
-							},{
-							"fusion_link_text": "Maint",
-							"fusion_link_title": "Setup and Maintenance",
-							"fusion_link": "https://@url.oraclecloud.com/fscmUI/faces/FuseTaskListManagerTop"
-							},{
-							"fusion_link_text": "Worklist",
-							"fusion_link_title": "BPM Worklist",
-							"fusion_link": "https://@url.oraclecloud.com/integration/worklistapp/faces/home.jspx"
-							},{
-							"fusion_link_text": "Admin",
-							"fusion_link_title": "BPM Admin Home",
-							"fusion_link": "https://@url.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=administration"
-							},{
-							"fusion_link_text": "Groups",
-							"fusion_link_title": "BPM Approval Groups",
-							"fusion_link": "https://@url.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=approvalGroup"
-							},{
-							"fusion_link_text": "Tasks",
-							"fusion_link_title": "BPM Approval Tasks",
-							"fusion_link": "https://@url.oraclecloud.com/integration/worklistapp/faces/administration.jspx?selectedAdminTab=taskConfig"
-							},{
-							"fusion_link_text": "CS",
-							"fusion_link_title": "Content Server",
-							"fusion_link": "https://@url.oraclecloud.com/cs"
-							},{
-							"fusion_link_text": "Img",
-							"fusion_link_title": "Imaging Homepage",
-							"fusion_link": "https://@url.oraclecloud.com/imaging/"
-							},{
-							"fusion_link_text": "History",
-							"fusion_link_title": "BI History Search",
-							"fusion_link": "https://@url.oraclecloud.com/analytics/saw.dll?bipublisherEntry&Action=history"
-							}
-						]
-					 };
 					 
 					// [02a] loop through the links for this instance
 					// #####################################################################
+					
+					let instance_links_html = ''; // html table rows for customer instances (e.g. home link, SQL link, BPM links etc.)
+					
 					for (let url_key in instance_urls.fusion_links) {
 						let obj = instance_urls.fusion_links[url_key];
 						let fusion_link_text = obj.fusion_link_text;
@@ -652,6 +748,8 @@
 					customer_links_rows_html += '<td class="environment_row ' + instance_css + '">' + prod_emoji + ' ' + instance_links_html;
 					customer_links_rows_html += '</td>';
 					customer_links_rows_html += '</tr>';
+					
+					// increment counters
 					colour_loop_counter++;
 					instances_loop_counter++;
 
@@ -670,74 +768,18 @@
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// ORACLE RELEASE DOCS
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		
-		// data for modules in a release
-		let data_modules = {
-			"modules": [{
-				"module_name": "Financials",
-				"label": "FIN",
-				"module_url_tag_1": "fin",
-				"module_url_tag_2": "financials"
-				},{
-				"module_name": "Procurement",
-				"label": "SCM",
-				"module_url_tag_1": "proc",
-				"module_url_tag_2": "procurement"
-				},{
-				"module_name": "Project Management",
-				"label": "PPM",
-				"module_url_tag_1": "ppm",
-				"module_url_tag_2": "ppm"
-				},{
-				"module_name": "Oracle Common Technologies and User Experience",
-				"label": "Common",
-				"module_url_tag_1": "common",
-				"module_url_tag_2": "common"
-				},{
-				"module_name": "Human Resources Cloud",
-				"label": "HCM",
-				"module_url_tag_1": "ghr",
-				"module_url_tag_2": "global-hr"
-				},{
-				"module_name": "Payroll",
-				"label": "PAYROLL",
-				"module_url_tag_1": "payroll",
-				"module_url_tag_2": "payroll"
-				},{
-				"module_name": "HCM Cloud Common",
-				"label": "HCM-Common",
-				"module_url_tag_1": "hcmcommon",
-				"module_url_tag_2": "hcm-common"
-				}
-			]
-		 };
-		
-		// general variables
-		let release_docs_rows_html = '';
+
+		// reset colour loop counter to zero
 		colour_loop_counter = 0;
-		let loop_year;
 		
-		// release array
-		const release_array = ["A","B","C","D"];
-		let release_array_length = release_array.length;
-
-		// years array (https://renatello.com/javascript-array-of-years/)
-		function generateArrayOfYears() {
-		  var min = 2019;
-		  var max = new Date().getFullYear() + 1; // include next year's release docs
-		  var years = []; // empty years array
-
-		  for (var i = min; i <= max; i++) {
-			years.push(i);
-		  }
-		  return years;
-		}
-
 		// build year array
 		var year_array = generateArrayOfYears();
 		
 		// get year array length
 		let year_array_length = year_array.length;
+		
+		// html table rows for release docs
+		let release_docs_rows_html = '';
 	
 		// [01] loop through years array
 		// #####################################################################
@@ -745,8 +787,12 @@
 
 			// current year
 			loop_year = year_array[i];
-			loop_year_string = loop_year.toString(); // convert year number to string otherwise slice doesn't work
-			loop_year_yy = loop_year_string.slice(-2); // get last 2 digits of year
+			
+			// convert year number to string otherwise slice doesn't work
+			loop_year_string = loop_year.toString();
+			
+			// get last 2 digits of year
+			loop_year_yy = loop_year_string.slice(-2);
 			
 			// if release is for current year set CSS marker so the release will have a red emoji dot in front of i t
 			if(loop_year === yyyy) {
@@ -766,46 +812,38 @@
 
 			// [02] loop through four releases per year
 			// #####################################################################
-			for (var x = 0; x < release_array_length; x++) {
+			
+			// set counter variable
+			let release_loop_counter = 1;
+			
+			for (let release_key in data_releases.releases) {
+			
+				let obj = data_releases.releases[release_key];
+				let release_letter = obj.release_letter;
+				let release_month = obj.release_month;
+				let release_number = obj.release_number;
 				
 				// loop tracker - add border to table row if moving from one release to the next
-				let release_mod = x % release_array_length;
-				if(release_mod === 3) {
+				// number for referred to in next line is the fact there are 4 releases per year
+				let release_modulus = release_loop_counter % 4;
+				if(release_modulus === 3) {
 					css_bar = " bar";
 				} else {
 					css_bar = "";
 				}
 				
-				// current release
-				loop_release = release_array[x];
-				
-				// set labels for current release
-				if(loop_release === "A") {
-					loop_release_month = "Jan";
-					loop_release_number = "01";
-				} else if(loop_release === "B") {
-					loop_release_month = "Apr";
-					loop_release_number = "04";
-				} else if(loop_release === "C") {
-					loop_release_month = "Jul";
-					loop_release_number = "07";
-				} else if(loop_release === "D") {
-					loop_release_month = "Oct";
-					loop_release_number = "10";
-				}
-				
-				let release_version = "11.13." + loop_year_yy + "." + loop_release_number + ".0";
-				let release_label = loop_year_yy + loop_release;
-				let release_date = loop_release_month + "-" + loop_year_yy;
+				let release_version = "11.13." + loop_year_yy + "." + release_number + ".0";
+				let release_label = loop_year_yy + release_letter;
+				let release_date = release_month + "-" + loop_year_yy;
 				
 				// set colour for this release
 				let module_css = "bd-" + release_colour + "-100";
 				
 				// build HTML for the table row for this release
 				release_docs_rows_html += '<tr>';
-				release_docs_rows_html += '<td class="' + module_css + ' ' + css_bar + '"><span class="' + var_current_year_css + '">' + release_label + '</span></td>';
-				release_docs_rows_html += '<td class="' + module_css + ' ' + css_bar + '"><code>' + release_version + '</code></td>';
-				release_docs_rows_html += '<td class="' + module_css + ' ' + css_bar + '">' + release_date + '</td><td class=" ' + css_bar + '">';
+				release_docs_rows_html += '<td><span class="' + var_current_year_css + '">' + release_label + '</span></td>';
+				release_docs_rows_html += '<td><code>' + release_version + '</code></td>';
+				release_docs_rows_html += '<td>' + release_date + '</td><td class="' + module_css + ' ' + css_bar + '">';
 
 				// [03] loop through the modules for this release
 				// #####################################################################
@@ -822,7 +860,7 @@
 					module_url = module_url.replace('@tag2', module_url_tag_2);
 					module_url = module_url.replace('@release1', release_label_url);
 					module_url = module_url.replace('@release2', release_label_url);				
-					release_docs_modules_html += ' <a style="text-decoration:none;" href="' + module_url + '" class="docs" title="' + module_name + ' ' + release_label + '")>' + label + '</a> / ';				
+					release_docs_modules_html += ' <a style="text-decoration:none;" href="' + module_url + '" class="docs ' + module_css + '" title="' + module_name + ' ' + release_label + '")>' + label + '</a> / ';				
 					release_docs_rows_html += release_docs_modules_html;
 				}
 				
@@ -830,9 +868,13 @@
 				
 				// set HTML content for DIV with ID value of "release_rows" - to contain the HTML defined via the javascript loops
 				document.getElementById('release_rows').innerHTML = release_docs_rows_html;
+				
+				// increment counter
+				release_loop_counter++;
 
 			}
 			
+			// increment counter
 			colour_loop_counter++;
 
 		}
