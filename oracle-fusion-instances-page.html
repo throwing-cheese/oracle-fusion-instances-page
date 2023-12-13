@@ -608,7 +608,7 @@
 				"release_month": "Jul",
 				"release_number": "07"
 				},{
-				"release_letter": "A",
+				"release_letter": "D",
 				"release_month": "Oct",
 				"release_number": "10"
 				}
@@ -822,13 +822,12 @@
 			
 				let obj = data_releases.releases[release_key];
 				let release_letter = obj.release_letter;
+				console.log("release_letter: " + release_letter + " // loop_year: " + loop_year);
 				let release_month = obj.release_month;
 				let release_number = obj.release_number;
 				
-				// loop tracker - add border to table row if moving from one release to the next
-				// number for referred to in next line is the fact there are 4 releases per year
-				let release_modulus = release_loop_counter % 4;
-				if(release_modulus === 3) {
+				// add border to table row if moving from one customer to the next
+				if(release_loop_counter === 4) {
 					css_bar = " bar";
 				} else {
 					css_bar = "";
@@ -843,9 +842,10 @@
 				
 				// build HTML for the table row for this release
 				release_docs_rows_html += '<tr>';
-				release_docs_rows_html += '<td><span class="' + var_current_year_css + '">' + release_label + '</span></td>';
-				release_docs_rows_html += '<td><code>' + release_version + '</code></td>';
-				release_docs_rows_html += '<td>' + release_date + '</td><td class="' + module_css + ' ' + css_bar + '">';
+				release_docs_rows_html += '<td class="' + css_bar + '"><span class="' + var_current_year_css + '">' + release_label + '</span></td>';
+				release_docs_rows_html += '<td class="' + css_bar + '"><code>' + release_version + '</code></td>';
+				release_docs_rows_html += '<td class="' + css_bar + '">' + release_date + '</td>';
+				release_docs_rows_html += '<td class="' + module_css + ' ' + css_bar + '">';
 
 				// [03] loop through the modules for this release
 				// #####################################################################
