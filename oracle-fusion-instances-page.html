@@ -26,13 +26,13 @@
 		.environment_row{padding:0 0 0 0; text-align:left; border-bottom:1px solid black; border-right:1px solid black;}
 		.even:hover{background:yellow !important;}
 		.href_non_prod:visited{background-color:purple;color:white;}
-		.href_non_prod{padding:0 5px 0 5px; text-align:center;}
+		.href_non_prod{padding:0 1px 0 1px; text-align:center;}
 		.href_prod:visited{background-color:red;color:white;}
-		.href_prod{padding:0 5px 0 5px; text-align:center;}
+		.href_prod{padding:0 1px 0 1px; text-align:center;}
 		.odd:hover{background:yellow !important;}
 		.prod{color:#fff;background:#000;}
 		.bar{border-bottom:1px solid black;}
-		.docs{padding:0 5px 0 5px; text-align:center;}
+		.docs{padding:0 1px 0 1px; text-align:center;}
 		.docs:visited{color:white;background-color:purple;}
 	</style>
   </head>
@@ -731,7 +731,7 @@
 						let fusion_link_title = obj.fusion_link_title;
 						fusion_link_title = initials + ' ' + label + ' ' + fusion_link_title;
 						module_url = fusion_link.replace('@url', url);
-						instance_links_html += '<a title="' + fusion_link_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + module_url + '">' + fusion_link_text + '</a>|'
+						instance_links_html += '<a title="' + fusion_link_title + '" style="text-decoration:none;" class="' + instance_link_class + ' ' + instance_css + '" href="' + module_url + '">' + fusion_link_text + '</a> | '
 					}
 					
 					// build up table row and table cell HTML variable.
@@ -747,7 +747,7 @@
 					} else {
 						customer_links_rows_html += '<td class="' + css_bar + '"></td>';
 					}
-					customer_links_rows_html += '<td class="environment_row ' + instance_css + '">' + prod_emoji + instance_links_html;
+					customer_links_rows_html += '<td class="environment_row ' + instance_css + '">' + prod_emoji + ' ' + instance_links_html;
 					customer_links_rows_html += '</td>';
 					customer_links_rows_html += '</tr>';
 					
@@ -862,7 +862,7 @@
 					module_url = module_url.replace('@tag2', module_url_tag_2);
 					module_url = module_url.replace('@release1', release_label_url);
 					module_url = module_url.replace('@release2', release_label_url);				
-					release_docs_modules_html += ' <a style="text-decoration:none;" href="' + module_url + '" class="docs ' + module_css + '" title="' + module_name + ' ' + release_label + '")>' + label + '</a> / ';				
+					release_docs_modules_html += ' <a style="text-decoration:none;" href="' + module_url + '" class="docs ' + module_css + '" title="' + module_name + ' ' + release_label + '")>' + label + '</a> | ';				
 					release_docs_rows_html += release_docs_modules_html;
 				}
 				
