@@ -77,130 +77,144 @@ Each customer has 5 attributes:
 
 let data_customers = {
 	"customers": [{
-		"name": "Department of Carrots",
-		"initials": "DOC",
-		"emoji": "🥕",
-		"url": "https://example.com/DepartmentofCarrots/",
+		"name": "Generic Corp One",
+		"initials": "GCO",
+		"emoji": "🔘",
+		"url": "https://example.com/GCO/",
 		"wave": "3",
 		"instances": [
-			{ "url": "bird.aa.bb2", "label":"PROD"},
-			{ "url": "bird-dev1.aa.bb2", "label":"DEV1"},
-			{ "url": "bird-test.aa.bb2", "label":"TEST"}
+			{ "url": "gco", "label":"PROD"},
+			{ "url": "gco-dev1", "label":"DEV1"},
+			{ "url": "gco-test", "label":"TEST"}
 		]}, {
-		"name": "Fine Cheese Manufacturers",
-		"initials": "FCM",
-		"emoji": "🧀",
-		"url": "https://example.com/DOC/",
+		"name": "Generic Corp Two",
+		"initials": "GCT",
+		"emoji": "🔴",
+		"url": "https://example.com/GCT/",
 		"wave": "n/a",
 		"instances": [
-			{ "url": "fa-long-saasfaprod1.fa.ocs", "label":"PROD"},
-			{ "url": "fa-long-dev1-saasfaprod1.fa.ocs", "label":"DEV1", "cloned":"2022-12-05"}
+			{ "url": "gct", "label":"PROD"},
+			{ "url": "gct-dev1", "label":"DEV1", "cloned":"2023-12-05"}
 		]}, {
-		"name": "Gotham City Council",
-		"initials": "GCC",
-		"emoji": "🦁",
-		"url": "https://example.com/FCM/",
+		"name": "Litter Picking Org",
+		"initials": "LPO",
+		"emoji": "✅",
+		"url": "https://example.com/LPO/",
+		"wave": "n/a",
+		"instances": [
+			{ "url": "lpo-dev1", "label":"DEV1", "cloned":"2023-10-18"}
+		]}, {
+		"name": "Tiny Town Council",
+		"initials": "TTC",
+		"emoji": "🟠",
+		"url": "https://example.com/TTC/",
 		"wave": "1",
 		"instances": [
-			{ "url": "song.fa.em3", "label":"PROD"},
-			{ "url": "song-test.fa.em3", "label":"TEST", "cloned":"2023-01-17" },
-			{ "url": "song-dev2.fa.em3", "label":"DEV2", "cloned":"2023-01-30" },
-			{ "url": "song-dev7.fa.em3", "label":"PREPROD", "cloned":"2022-06-23" },
-			{ "url": "song-dev1.fa.em3", "label":"TRAIN", "cloned":"2022-11-29" }
+			{ "url": "ttc", "label":"PROD"},
+			{ "url": "ttc-dev001", "label":"DEV001", "cloned":"2023-11-01" },
+			{ "url": "ttc-dev002", "label":"DEV002", "cloned":"2023-11-02" },
+			{ "url": "ttc-dev003", "label":"DEV003", "cloned":"2023-11-03" },
+			{ "url": "ttc-dev004", "label":"DEV004", "cloned":"2023-11-04" },
+			{ "url": "ttc-dev005", "label":"DEV005", "cloned":"2023-11-05" },
+			{ "url": "ttc-dev006", "label":"DEV006", "cloned":"2023-11-06" },
+			{ "url": "ttc-dev007", "label":"DEV007", "cloned":"2023-11-07" },
+			{ "url": "ttc-dev008", "label":"DEV008", "cloned":"2023-11-08" },
+			{ "url": "ttc-dev009", "label":"DEV009", "cloned":"2023-11-09" },
+			{ "url": "ttc-dev010", "label":"DEV010", "cloned":"2023-11-10" },
+			{ "url": "ttc-dev011", "label":"DEV011", "cloned":"2023-11-11" },
+			{ "url": "ttc-dev012", "label":"DEV012", "cloned":"2023-11-12" }
 		]}, {
-		"name": "Incredibly Edible Bricks",
-		"initials": "IEB",
-		"emoji": "🐮",
-		"wave": "3"
-		}, {
+		"name": "Expensive Widget Company",
+		"initials": "EWC",
+		"emoji": "🟡",
+		"wave": "3",
+		"instances": [
+			{ "url": "ewc", "label":"PROD"},
+			{ "url": "ewc-dev1", "label":"DEV1", "cloned":"2023-12-10" },
+			{ "url": "ewc-dev3", "label":"DEV3", "cloned":"2023-09-22" }
+		]}, {
 		"name": "Gotham City Hospital",
 		"initials": "GCH",
-		"emoji": "🏥",
-		"url": "https://example.com/GCH/Shared%20Documents/Managed%20Services",
+		"emoji": "🟢",
+		"url": "https://example.com/GCH/",
 		"wave": "2",
 		"instances": [
-			{ "url": "fa-ping-saasfaprod1.fa.ocs", "label":"PROD"},
-			{ "url": "fa-ping-dev1-saasfaprod1.fa.ocs", "label":"DEV", "cloned":"2022-11-16" },
-			{ "url": "fa-ping-test-saasfaprod1.fa.ocs", "label":"TEST", "cloned":"2022-11-17" }
+			{ "url": "gch", "label":"PROD"},
+			{ "url": "gch-dev1", "label":"DEV", "cloned":"2023-11-16" },
+			{ "url": "gch-test", "label":"TEST", "cloned":"2023-11-17" }
 		]}, {
-		"name": "Fine Cheese Runners",
-		"initials": "FCR",
-		"emoji": "🏃",
-		"url": "https://example.com/FCR/",
-		"wave": ""
-		}, {
-		"name": "Cheesy Crate Express",
-		"initials": "CCE",
-		"emoji": "🎯",
-		"url": "https://example.com/CCE/",
+		"name": "Express Crate Services",
+		"initials": "ECS",
+		"emoji": "🟣",
+		"url": "https://example.com/ECS/",
 		"wave": "1",
 		"instances": [
-			{ "url": "fa-pong-saasfaprod1.fa.ocs", "label":"PROD"},
-			{ "url": "fa-pong-dev1-saasfaprod1.fa.ocs", "label":"DEV", "cloned":"2022-06-10" },
-			{ "url": "fa-pong-test-saasfaprod1.fa.ocs", "label":"TEST", "cloned":"2022-11-28" }
+			{ "url": "ecs", "label":"PROD"},
+			{ "url": "ecs-dev1", "label":"DEV", "cloned":"2023-06-10" },
+			{ "url": "ecs-test", "label":"TEST", "cloned":"2023-11-28" }
 		]}, {
-		"name": "Fromage Fresh Corp",
-		"initials": "FFC",
-		"emoji": "🥶",
-		"url": "https://example.com/FFC/",
+		"name": "Fresh Vegetables Corp",
+		"initials": "FVC",
+		"emoji": "⭕",
+		"url": "https://example.com/FVC/",
 		"wave": "1",
 		"instances": [
-			{ "url": "hoop.fa.em3", "label":"PROD"},
-			{ "url": "hoop-dev2.fa.em3", "label":"DEV2"},
-			{ "url": "hoop-dev4.fa.em3", "label":"DEV4"},
-			{ "url": "hoop-test.fa.em3", "label":"TEST"}
+			{ "url": "fvc", "label":"PROD"},
+			{ "url": "fvc-dev2", "label":"DEV2"},
+			{ "url": "fvc-dev4", "label":"DEV4"},
+			{ "url": "fvc-test", "label":"TEST"}
 		]}, {
-		"name": "Ricotta Ridge Express",
-		"initials": "RRE",
-		"emoji": "✅",
-		"url": "https://example.com/RRE/",
+		"name": "Precise Civil Engineering",
+		"initials": "PCE",
+		"emoji": "⏺️",
+		"url": "https://example.com/PCE/",
 		"wave": "3",
 		"instances": [
-			{ "url": "flat.fa.em1.zzz", "label":"PROD", "css":"PROD"},
-			{ "url": "flat-dev1.fa.em1.zzz", "label":"DEV"},
-			{ "url": "flat-test.fa.em1.zzz", "label":"TEST"}
+			{ "url": "pce.fa.em1.zzz", "label":"PROD", "css":"PROD"},
+			{ "url": "pce-dev1", "label":"DEV"},
+			{ "url": "pce-test", "label":"TEST"}
 		]}, {
-		"name": "Stinky Cheese Association",
-		"initials": "SCA",
-		"emoji": "👃",
-		"url": "https://example.com/SCA/",
+		"name": "Fish Direct Ltd",
+		"initials": "FDL",
+		"emoji": "🟥",
+		"url": "https://example.com/FDL/",
 		"wave": "3",
 		"instances": [
-			{ "url": "fa-golf-saasfaprod1.fa.ocs", "label":"PROD"},
-			{ "url": "fa-golf-dev1-saasfaprod1.fa.ocs", "label":"DEV1"},
-			{ "url": "fa-golf-test-saasfaprod1.fa.ocs", "label":"TEST"}
+			{ "url": "fdl", "label":"PROD"},
+			{ "url": "fdl-dev1", "label":"DEV1"},
+			{ "url": "fdl-test", "label":"TEST"}
 		]}, {
-		"name": "Smelly Socks Champions",
-		"initials": "SSC",
-		"emoji": "🧦",
-		"url": "https://example.com/SSC/",
+		"name": "Government Trade Contracts",
+		"initials": "GTC",
+		"emoji": "🟧",
+		"url": "https://example.com/GTC/",
 		"wave": "3",
 		"instances": [
-			{ "url": "flit.fa.em1.zzz", "label":"PROD"},
-			{ "url": "flit-test.fa.em1.zzz", "label":"TEST"}
+			{ "url": "gtc", "label":"PROD"},
+			{ "url": "gtc-test", "label":"TEST"}
 		]}, {
-		"name": "Pungent Cheddar Association",
-		"initials": "PCA",
-		"emoji": "🐈",
-		"url": "https://example.com/PCA/",
+		"name": "Capable House Builders",
+		"initials": "CHB",
+		"emoji": "🟨",
+		"url": "https://example.com/CHB/",
 		"wave": "1",
 		"instances": [
-			{ "url": "flot.fa.em3", "label":"PROD"},
-			{ "url": "flot-dev2.fa.em3", "label":"DEV"},
-			{ "url": "flot-test.fa.em3", "label":"TEST"},
-			{ "url": "flot-dev5.fa.em3", "label":"TRAIN"}
+			{ "url": "chb", "label":"PROD"},
+			{ "url": "chb-dev2", "label":"DEV"},
+			{ "url": "chb-test", "label":"TEST"},
+			{ "url": "chb-dev5", "label":"TRAIN"}
 		]}, {
-		"name": "Metropolis City Council",
-		"initials": "MCC",
-		"emoji": "🍎",
-		"url": "https://example.com/MCC/",
+		"name": "Gotham City Services",
+		"initials": "GCS",
+		"emoji": "🟦",
+		"url": "https://example.com/GCS/",
 		"wave": "1",
 		"instances": [
-			{ "url": "able.fa.em3", "label":"PROD"},
-			{ "url": "able-dev1.fa.em3", "label":"DEV1"},
-			{ "url": "able-dev2.fa.em3", "label":"DEV2"},
-			{ "url": "able-dev3.fa.em3", "label":"DEV3"},
-			{ "url": "able-test.fa.em3", "label":"TEST"}
+			{ "url": "gcs", "label":"PROD"},
+			{ "url": "gcs-dev1", "label":"DEV1"},
+			{ "url": "gcs-dev2", "label":"DEV2"},
+			{ "url": "gcs-dev3", "label":"DEV3"},
+			{ "url": "gcs-test", "label":"TEST"}
 		]}
 	]
  };
@@ -231,7 +245,7 @@ let data_modules = {
 		"module_url_tag_2": "financials"
 		},{
 		"module_name": "Procurement",
-		"label": "SCM",
+		"label": "PROC",
 		"module_url_tag_1": "proc",
 		"module_url_tag_2": "procurement"
 		},{
